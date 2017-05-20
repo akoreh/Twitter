@@ -1,4 +1,4 @@
-@extends('layouts.temp')
+@extends('layouts.app')
 
 @section('content')
     <script src="{{asset('js/register.js')}}"></script>

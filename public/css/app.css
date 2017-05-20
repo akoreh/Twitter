@@ -4,9 +4,6 @@
     height: 100vh;
 }
 
-a:hover{
-    text-decoration:none;
-}
 
 .logo {
     position: static;
@@ -14,11 +11,13 @@ a:hover{
     right: 0px;
     display: inline-block;
     margin-top: 15px;
-    margin-left: 30%;
+    margin-right: auto;
+    margin-left: auto;
     float: none;
     font-family: 'Fontawesome webfont', sans-serif;
     color: #00aced;
     font-size: 200%;
+    text-align: center;
 }
 
 .navbar {
@@ -50,6 +49,24 @@ a:hover{
 
 .nav-link:hover {
     border-bottom: 4px solid #1da1f2;
+}
+
+.nav-link.profile-hero-button {
+    position: static;
+    left: 0px;
+    top: 13px;
+    right: 0px;
+    bottom: 0px;
+    display: inline-block;
+    height: 60px;
+    padding-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-link.profile-hero-button:hover {
+    color: #1da1f2;
 }
 
 .row {
@@ -215,6 +232,7 @@ a:hover{
     min-width: 80%;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
 }
 
 .tweet-button {
@@ -244,6 +262,10 @@ a:hover{
     text-align: left;
 }
 
+.nav-avatar.profile-fixed-nav-avatar {
+    float: left;
+}
+
 .image {
     position: static;
     top: 0px;
@@ -255,6 +277,14 @@ a:hover{
     float: left;
     clear: none;
     border-radius: 15px;
+}
+
+.image.phone-profile-image {
+    display: none;
+}
+
+.image.fixed-profile-image {
+    margin-top: 5px;
 }
 
 .nav-right {
@@ -290,6 +320,10 @@ a:hover{
     margin-top: 60px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.main-wrapper.profile-main-wrapper {
+    margin-top: 0px;
 }
 
 .homepage-left-column-wrapper {
@@ -351,7 +385,6 @@ a:hover{
     color: #657786;
     font-size: 14px;
     font-weight: 400;
-    clear:left;
 }
 
 .homepage-left-column-tweet-count-wrapper {
@@ -366,7 +399,7 @@ a:hover{
 .homepage-left-column-tweet-count-wrapper.homepage-left-column-follower-count-wrapper {
     display: inline-block;
     margin-left: 15%;
-    float: left;
+    float: none;
     clear: none;
 }
 
@@ -476,6 +509,14 @@ a:hover{
     margin-top: 0px;
 }
 
+.tweet-username.phone-profile-username {
+    display: none;
+}
+
+.tweet-username.profile-fixed-username {
+    margin-left: 8px;
+}
+
 .tweet-handle {
     display: block;
     margin-top: 10px;
@@ -495,6 +536,15 @@ a:hover{
     margin-top: 0px;
     margin-left: 3px;
     float: left;
+}
+
+.tweet-handle.phone-profile-handle {
+    display: none;
+}
+
+.tweet-handle.profile-fixed-user-handle {
+    float: left;
+    clear: right;
 }
 
 .tweet-date {
@@ -557,6 +607,8 @@ a:hover{
 }
 
 .homepage-right-column-wrapper {
+    max-width: 300px;
+    min-width: 230px;
     padding-top: 0px;
     border-radius: 5px;
     background-color: #fff;
@@ -594,6 +646,27 @@ a:hover{
     text-align: center;
 }
 
+.follow-suggestion-button.profile-follow-button {
+    position: relative;
+    margin-top: 2%;
+    padding: 8px 16px;
+    float: right;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.follow-suggestion-button.profile-follow-button:hover {
+    background-color: rgba(29, 161, 242, .2);
+}
+
+.follow-suggestion-button.profile-follow-button.profile-fixed-follow-button {
+    position: relative;
+    left: 268px;
+    top: -12px;
+    display: inline-block;
+    float: none;
+}
+
 .follow-icon {
     margin-right: 3px;
     font-family: 'Fontawesome webfont', sans-serif;
@@ -601,9 +674,9 @@ a:hover{
 
 .follower-suggestion-aux-div {
     overflow: hidden;
+    width: 65%;
     margin-left: 10px;
     float: left;
-    width:65%;
 }
 
 .tweet-modal-wrapper {
@@ -689,6 +762,159 @@ a:hover{
     font-family: 'Fontawesome webfont', sans-serif;
 }
 
+.profile-hero-section {
+    margin-top: 50px;
+    background-color: #fff;
+}
+
+.profile-hero-image-wrapper {
+    width: 100%;
+    height: 450px;
+    min-width: 100%;
+}
+
+.profile-hero-image {
+    position: static;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    max-height: 450px;
+}
+
+.profile-hero-bar {
+    width: 100%;
+    height: 60px;
+    min-height: 60px;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, .39);
+}
+
+.profile-hero-bar.profile-hero-bar-fixed {
+    position: fixed;
+    left: 0px;
+    top: 49px;
+    right: 0px;
+    z-index: 40;
+    display: none;
+    border-top: 1px solid rgba(0, 0, 0, .11);
+    background-color: #fff;
+}
+
+.profile-avatar {
+    position: relative;
+    left: 0px;
+    top: -96px;
+    right: 0px;
+    border-radius: 5px;
+}
+
+.profile-avatar.homepage-left-column-avatar {
+    top: -168px;
+    border-width: 4px;
+    border-radius: 10px;
+}
+
+.container {
+    position: static;
+    display: block;
+}
+
+.container-2 {
+    height: 60px;
+}
+
+.profile-hero-button-wrapper {
+    display: block;
+    height: 60px;
+    max-width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile-hero-button-wrapper.profile-hero-button-wrapper-fixed {
+    display: inline-block;
+    width: 75%;
+    max-width: 70%;
+    float: right;
+}
+
+.profile-hero-count {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.follow {
+    float: right;
+}
+
+.profile-row {
+    position: relative;
+    top: -182px;
+    right: 8px;
+}
+
+.profile-user-info-wrapper {
+    position: relative;
+    left: 27px;
+    top: 28px;
+}
+
+.profile-username {
+    margin-top: 2px;
+    color: #14171a;
+    font-size: 21px;
+    line-height: 28px;
+}
+
+.profile-handle {
+    margin-top: 0px;
+    color: #657786;
+    font-size: 14px;
+    line-height: 1px;
+    font-weight: 400;
+}
+
+.profile-bio {
+    margin-top: 20px;
+    padding-right: 30px;
+    color: #14171a;
+}
+
+.map-beacon-icon {
+    padding-right: 15px;
+    float: left;
+    font-family: 'Fontawesome webfont', sans-serif;
+    color: #657786;
+    font-size: 18px;
+}
+
+.profile-subheading {
+    color: #657786;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.calendar-icon {
+    padding-right: 15px;
+    float: left;
+    font-family: 'Fontawesome webfont', sans-serif;
+    font-size: 18px;
+}
+
+.profile-hero-fixed-avatar-wrapper {
+    display: inline-block;
+    width: 25%;
+    max-width: 40%;
+    padding-left: 25px;
+    float: left;
+}
+
+.profile-hero-bar-fixed.profile-hero-bar {
+    display: block;
+}
+
 @media (max-width: 991px) {
     .welcome-left-wrapper {
         float: left;
@@ -707,6 +933,14 @@ a:hover{
         position: relative;
         display: block;
     }
+    .tweet-button {
+        position: relative;
+        top: -3px;
+    }
+    .image.phone-profile-image {
+        display: block;
+        margin-left: 25px;
+    }
     .column {
         display: none;
     }
@@ -716,20 +950,75 @@ a:hover{
     .column-3 {
         display: block;
     }
+    .tweet-username.phone-profile-username {
+        display: block;
+        margin-left: 6px;
+    }
+    .tweet-handle.phone-profile-handle {
+        display: block;
+        margin-top: 0px;
+        float: left;
+        clear: none;
+    }
     .icon {
         display: none;
+    }
+    .follow-suggestion-button.profile-follow-button {
+        position: relative;
+        display: inline;
+        margin-right: 5px;
+        float: right;
     }
     .tweet-modal {
         max-width: 80%;
     }
+    .profile-hero-image-wrapper {
+        display: none;
+    }
+    .profile-hero-bar {
+        position: fixed;
+        top: 45px;
+        z-index: 300;
+        border-top: 1px solid rgba(0, 0, 0, .12);
+        background-color: #fff;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .39);
+    }
+    .profile-avatar.homepage-left-column-avatar {
+        display: none;
+    }
+    .profile-hero-button-wrapper {
+        max-width: 80%;
+        float: right;
+    }
+    .profile-row {
+        top: 10px;
+    }
 }
 
 @media (max-width: 767px) {
+    .nav-link.profile-hero-button {
+        display: none;
+    }
     .welcome-right-column {
         padding-left: 25%;
     }
     .welcome-left-column {
         display: none;
+    }
+    .image.phone-profile-image {
+        display: block;
+    }
+    .tweet-username.phone-profile-username {
+        display: block;
+    }
+    .tweet-handle.phone-profile-handle {
+        display: block;
+        margin-top: 10px;
+        float: left;
+        clear: none;
+    }
+    .follow-suggestion-button.profile-follow-button {
+        margin-right: 15px;
     }
 }
 
@@ -744,6 +1033,9 @@ a:hover{
     .image {
         float: left;
     }
+    .image.phone-profile-image {
+        display: none;
+    }
     .column-3 {
         display: block;
         margin-top: 50px;
@@ -757,8 +1049,16 @@ a:hover{
         min-width: 99%;
         padding-left: 15px;
     }
+    .tweet-handle.phone-profile-handle {
+        position: relative;
+        top: -9px;
+    }
     .icon {
         float: none;
+    }
+    .follow-suggestion-button.profile-follow-button {
+        top: 9px;
+        right: -1px;
     }
     .tweet-modal {
         max-width: 90%;

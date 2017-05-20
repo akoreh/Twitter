@@ -2943,5 +2943,7 @@
  */
 Webflow.require('ix').init([
   {"slug":"show-tweet-modal","name":"Show Tweet Modal","value":{"style":{},"triggers":[{"type":"click","selector":".tweet-modal-wrapper","stepsA":[{"display":"block"},{"opacity":1,"transition":"opacity 400ms ease 0"}],"stepsB":[]}]}},
-  {"slug":"hide-tweet-modal","name":"Hide Tweet Modal","value":{"style":{},"triggers":[{"type":"click","selector":".tweet-modal-wrapper","stepsA":[{"opacity":0,"transition":"opacity 400ms ease-out 0"},{"display":"none"}],"stepsB":[]}]}}
+  {"slug":"hide-tweet-modal","name":"Hide Tweet Modal","value":{"style":{},"triggers":[{"type":"click","selector":".tweet-modal-wrapper","stepsA":[{"opacity":0,"transition":"opacity 400ms ease-out 0"},{"display":"none"}],"stepsB":[]}]}},
+  {"slug":"profile-scroll-navbar","name":"Profile Scroll navbar","value":{"style":{},"triggers":[{"type":"scroll","selector":".profile-hero-bar-fixed","offsetBot":"90%","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"hide-profile-navbar","name":"Hide Profile Navbar","value":{"style":{},"triggers":[{"type":"scroll","selector":".profile-hero-bar-fixed","stepsA":[{"display":"none","opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[{"display":"block","opacity":1,"transition":"opacity 200 ease 0"}]}]}}
 ]);

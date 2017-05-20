@@ -14,7 +14,8 @@ class UserProfile extends Model
         'display_name',
         'handle',
         'image_id',
-        'url_handle'
+        'url_handle',
+        'banner'
     ];
 
     public function image(){
