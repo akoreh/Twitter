@@ -44,7 +44,7 @@ class HomeController extends Controller
             return view('home',compact('user','tweets'));
         }
         else{
-            return view('auth.login');
+            return view('welcome');
         }
 
 

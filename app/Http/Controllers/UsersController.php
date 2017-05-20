@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Tweet;
+use App\User;
 use App\UserProfile;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
-class TweetsController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,34 +39,18 @@ class TweetsController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
-        $user = Auth::user();
-
-        $input['tweet'] = $request['tweet'];
-
-        $input['user_id']=$user->id;
-
-        Tweet::create($input);
-
-
+        //
     }
 
-
-    public function getProfileTweets($handle)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $profile=UserProfile::where('url_handle',$handle)->first();
-
-        if($profile){
-        $user = $profile->user;
-
-        $tweets = Tweet::where('user_id', $user->id)->latest()->get();
-
-        return view('users.profile', compact('tweets', 'user'));
-    }else{
-            return view('404');
-    }
+        //
     }
 
     /**
@@ -101,5 +85,35 @@ class TweetsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkHandle(){
+
+        $inputHandle=Input::get('handle');
+
+        $handle = UserProfile::where('url_handle',$inputHandle)->first();
+
+        if($handle){
+            return "taken";
+        }else{
+            return "not taken";
+        }
+
+
+    }
+
+    public function checkEmail(){
+
+        $inputEmail=Input::get('email');
+
+        $user = User::where('email',$inputEmail)->first();
+
+        if($user){
+            return "taken";
+        }else{
+            return "not taken";
+        }
+
+
     }
 }

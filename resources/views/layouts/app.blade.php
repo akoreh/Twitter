@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script
@@ -31,7 +32,8 @@
 
 </head>
 <body id="app-layout">
-<div class="alert alert-success top-alert" role="alert">Tweet Submitted!</div>
+<div class="alert alert-success success-alert top-alert" role="alert">Tweet Posted!</div>
+<div class="alert alert-danger error-alert top-alert" role="alert">Failed to Post!</div>
 <script>$('.top-alert').animate({bottom: '+=500'},{duration: 1})</script>
 
 
@@ -101,7 +103,7 @@
 
                     <form id="tweet-form" action="{{route('tweet')}}" method="POST">
                         <div class="form-group">
-                            <meta name="csrf-token" content="{{ csrf_token() }}">
+
                             <label for="tweet">Tweet:</label>
                             <textarea class="form-control" id="tweet" name="tweet"></textarea>
 
@@ -130,10 +132,10 @@
                             },
                             success:function(){
                                 $('#tweet').val('');
-                                $(".top-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
                             },
                             error: function(){
-                                alert("Error");
+                                $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
                             }
 
                         });
@@ -150,7 +152,7 @@
 
     <!-- JavaScripts -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

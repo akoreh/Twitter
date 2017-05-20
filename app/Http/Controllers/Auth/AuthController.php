@@ -75,8 +75,8 @@ class AuthController extends Controller
 
            'user_id' => $user->id,
            'display_name'=>$data['username'],
-           'handle'=>"@".strtolower($data['username']),
-           'url_handle'=>strtolower($data['username']),
+           'handle'=>"@".$data['handle'],
+           'url_handle'=>$data['handle'],
            'image_id'=> 1
 
         ]);

@@ -1,98 +1,95 @@
-@extends('layouts.app')
+@extends('layouts.temp')
+
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="col-md-3 pull-left user-info-panel">
-                <div class="panel panel-default">
-                    <div class="user-panel-heading panel-heading"></div>
-
-                    <div class="panel-body">
-                        <div class="pull-left">
-                            <img src="/images/profiles/{{Auth::user()->profile->image->file}}" alt="" class="avatar">
-                        </div>
-                        <h3 class="display-name">{{$user->profile->display_name}}</h3>
-                        <h5 ><a href="/{{$user->profile->url_handle}}" class="display-handle">{{$user->profile->handle}}</a></h5>
-                        <div style="clear:both;">
-                            <div class="pull-left" style="margin-right: 25px;">
-                                <h4 class="pull-left tweets-label">Tweets</h4>
-                                <div style="clear:both">
-                                    <h5 class="pull-left tweets-count">0</h5>
-                                </div>
-
-                            </div>
-
-                           <div class="pull-left">
-                               <h4 class="pull-left following-label">Following</h4>
-                               <div style="clear:both">
-                                   <h5 class="pull-left following-count">{{count($user->following)}}</h5>
-                               </div>
-                           </div>
-                        </div>
+@include('partials.navigation')
+    <div class="main-wrapper">
+        <div class="w-row">
+            <div class="column w-col w-col-3 w-col-stack">
+                <div class="homepage-left-column-wrapper w-clearfix">
+                    <div class="homepage-left-column-blue-top"></div><a class="homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->display_name}}</a><a class="homepage-left-handle homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->handle}}</a><img class="homepage-left-column-avatar" height="72" src="/images/profiles/{{$user->profile->image->file}}" width="72">
+                    <div class="homepage-left-column-tweet-count-wrapper w-clearfix">
+                        <h3 class="homepage-left-column-count-heading">Tweets</h3><a class="tweet-count" href="#">{{count($user->tweets)}}</a>
+                    </div>
+                    <div class="homepage-left-column-follower-count-wrapper homepage-left-column-tweet-count-wrapper w-clearfix">
+                        <h3 class="following-count homepage-left-column-count-heading">Following</h3><a class="following-count tweet-count" href="#">{{count($user->following)}}</a>
+                    </div>
+                </div>
+                <div class="homepage-left-column-trending-wrapper homepage-left-column-wrapper w-clearfix">
+                    <h3 class="homepage-left-column-trending-heading">Trending</h3>
+                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#BattleOfBucharest</a>
+                        <h6 class="trending-tweet-count">4,505 Tweets</h6>
+                    </div>
+                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#ThreeWordTrump</a>
+                        <h6 class="trending-tweet-count">17,454 Tweets</h6>
+                    </div>
+                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#Romanian</a>
+                        <h6 class="trending-tweet-count">1,631 Tweets</h6>
+                    </div>
+                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#saturdaymorning</a>
+                        <h6 class="trending-tweet-count">8,034 Tweets</h6>
+                    </div>
+                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#WorldWhiskyDay</a>
+                        <h6 class="trending-tweet-count">3,274 Tweets</h6>
+                    </div>
+                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#AFLPiesHawks</a>
+                        <h6 class="trending-tweet-count">5,204 Tweets</h6>
                     </div>
                 </div>
             </div>
-           <div class="col-md-6 col-sm-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"></div>
-
-                    <div class="panel-body feed-panel-body">
-                        @if(count($tweets) > 0)
-                            @foreach($tweets as $tweet)
-                                <div class="tweet">
-                                    <div class="row">
-                                        <div class="col-md-1 pull-left">
-                                            <a href="/{{$tweet->user->profile->url_handle}}"><img class="tweet-avatar" src="/images/profiles/{{$tweet->user->profile->image->file}}" alt=""></a>
-                                        </div>
-                                        <div class="col-md-11 pull-right tweet-col">
-                                            <a href="/{{$tweet->user->profile->url_handle}}"><h5 class="tweet-username">{{$tweet->user->profile->display_name}}</h5></a>
-                                            <a href="/{{$tweet->user->profile->url_handle}}"><h5 class="tweet-handle">{{$tweet->user->profile->handle}}</h5></a> <span> · </span>
-                                            <h5 class="tweet-date">{{$tweet->created_at->diffForHumans()}}</h5>
-                                            <div class="tweet-body">
-                                                @if($embed=$tweet->getEmbed())
-                                                    <p class="tweet-text">{{$tweet->withoutURL()}}</p>
-                                                    <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
-                                                    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-                                                    <div class="tweet-button-wrapper">
-                                                        <i class="fa fa-reply" aria-hidden="true"></i><p>64</p>
-                                                        <i class="fa fa-retweet icon" aria-hidden="true"></i><p>758</p>
-                                                        <i class="fa fa-heart icon" aria-hidden="true"></i><p>897</p>
-                                                    </div>
-                                                @else
-                                                    <p>{{$tweet->tweet}}</p>
-
-                                                    <div class="tweet-button-wrapper">
-                                                        <i class="fa fa-reply" aria-hidden="true"></i><p>64</p>
-                                                        <i class="fa fa-retweet icon" aria-hidden="true"></i><p>758</p>
-                                                        <i class="fa fa-heart icon" aria-hidden="true"></i><p>897</p>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+            <div class="column-3 w-col w-col-6 w-col-stack">
+                @if(count($tweets) > 0)
+                    @foreach($tweets as $tweet)
+                <div class="tweet-wrapper w-clearfix">
+                    <div class="tweet-left-side-wrapper"><a href="{{route('show.profile',$tweet->user->profile->url_handle)}}"><img class="tweet-avatar" height="48" src="/images/profiles/{{$tweet->user->profile->image->file}}" width="48"></a>
+                    </div>
+                    <div class="tweet-right-side-wrapper w-clearfix"><a class="tweet-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a><a class="tweet-handle" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span><a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
+                        @if($embed=$tweet->getEmbed())
+                        <p class="tweet-text">{{$tweet->withoutURL()}}</p>
+                            <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
+                            <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                            <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
+                            </div>
+                    </div>
+                </div>
                         @else
-                            <div class="tweet-body">
-                                <h4>Nothing to show! Follow other users to see their tweets!</h4>
-                            </div>
-                        @endif
+
+                         <p class="tweet-text">{{$tweet->tweet}}</p>
+
+                        <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
+                        </div>
                     </div>
                 </div>
+                        @endif
+                    @endforeach
+                @else
+            <div class="tweet-wrapper w-clearfix">
+                    <h4>Nothing to show! Follow other users to see their tweets!</h4>
             </div>
-            <div class="col-md-3 pull-right user-info-panel">
-                <div class="panel panel-default">
-                    <div class="panel-heading"></div>
+                @endif
+            </div>
 
-                    <div class="panel-body">
-                        <img src="http://www.toxel.com/wp-content/uploads/2008/07/ua2.jpg" alt="" class="advertisement">
-                        <img src="https://i.ytimg.com/vi/IRiFZFTZME0/maxresdefault.jpg" alt="" class="advertisement">
+            {{--WHO TO FOLLOW SECTION--}}
+            <div class="column-2 w-col w-col-3 w-col-stack">
+                <div class="homepage-right-column-wrapper">
+                    <h3 class="homepage-left-column-trending-heading">Who to follow</h3>
+                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/Ms2bWRqk_normal.jpg" width="48">
+                        <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Michael Zimmerman</a><a class="follow-suggestion-handle tweet-handle" href="#">@zimm3rman</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
+                        </div>
+                    </div>
+                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/eYMXfAQX_normal.jpg" width="48">
+                        <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Maggie</a><a class="follow-suggestion-handle tweet-handle" href="#">@margaretjhowell</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
+                        </div>
+                    </div>
+                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/5UgMNCwA_normal.jpg" width="48">
+                        <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Breitbart News</a><a class="follow-suggestion-handle tweet-handle" href="#">@BreitbartNews</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+
+
 @endsection

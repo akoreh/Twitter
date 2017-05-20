@@ -12,6 +12,7 @@ class UserProfile extends Model
 
         'user_id',
         'display_name',
+        'handle',
         'image_id',
         'url_handle'
     ];

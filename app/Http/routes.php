@@ -11,13 +11,22 @@
 |
 */
 
+Route::get('/checkHandle','UsersController@checkHandle');
+Route::get('/checkEmail','UsersController@checkEmail');
 
 
-Route::auth();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/{handle}','TweetsController@getProfileTweets');
+Route::get('/welcome','HomeController@index');
+
+Route::auth();
+
+Route::get('/login','Auth\AuthController@login')->name('login');
+
+Route::get('/register','Auth\AuthController@register')->name('register');
+
+Route::get('/{handle}','TweetsController@getProfileTweets')->name('show.profile');
 
 Route::group(['middleware'=>'auth'],function() {
 
