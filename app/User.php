@@ -42,4 +42,18 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\User', 'user_relations', 'follower_id', 'followed_id');
     }
+
+    public function  checkFollowing($user){
+
+
+        foreach ($this->following as $followedUser) {
+            if ($followedUser->id == $user->id) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    }
 }

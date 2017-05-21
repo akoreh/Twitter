@@ -53,22 +53,6 @@ class TweetsController extends Controller
 
     }
 
-
-    public function getProfileTweets($handle)
-    {
-        $profile=UserProfile::where('url_handle',$handle)->first();
-
-        if($profile){
-        $user = $profile->user;
-
-        $tweets = Tweet::where('user_id', $user->id)->latest()->get();
-
-        return view('users.profile', compact('tweets', 'user'));
-    }else{
-            return view('404');
-    }
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

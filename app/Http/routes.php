@@ -26,7 +26,7 @@ Route::get('/login','Auth\AuthController@login')->name('login');
 
 Route::get('/register','Auth\AuthController@register')->name('register');
 
-Route::get('/{handle}','TweetsController@getProfileTweets')->name('show.profile');
+Route::get('/{handle}','UsersController@getProfile')->name('show.profile');
 
 Route::group(['middleware'=>'auth'],function() {
 

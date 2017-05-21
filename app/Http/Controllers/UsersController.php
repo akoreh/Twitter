@@ -87,6 +87,24 @@ class UsersController extends Controller
         //
     }
 
+    public function getProfile($handle){
+
+        $profile=UserProfile::where('url_handle',$handle)->first();
+
+        if($profile){
+            $user = $profile->user;
+
+            $tweets=$user->tweets()->latest()->get();
+
+
+//            $tweets = Tweet::where('user_id', $user->id)->latest()->get();
+
+            return view('users.profile', compact('tweets', 'user'));
+        }else{
+            return view('errors.404');
+        }
+    }
+
     public function checkHandle(){
 
         $inputHandle=Input::get('handle');
@@ -116,4 +134,6 @@ class UsersController extends Controller
 
 
     }
+
+
 }

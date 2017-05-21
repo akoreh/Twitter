@@ -4,7 +4,9 @@
     height: 100vh;
 }
 
-
+a:hover{
+    text-decoration:none !important;
+}
 .logo {
     position: static;
     top: 0px;
@@ -28,6 +30,7 @@
     padding-top: 0px;
     padding-bottom: 0px;
     background-color: #fff;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, .46);
 }
 
 .nav-link {
@@ -49,6 +52,7 @@
 
 .nav-link:hover {
     border-bottom: 4px solid #1da1f2;
+    text-decoration: none;
 }
 
 .nav-link.profile-hero-button {
@@ -298,10 +302,10 @@
     -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -667,6 +671,15 @@
     float: none;
 }
 
+.follow-suggestion-button.profile-unfollow-button.profile-follow-button {
+    background-color: #2fc2ef;
+    color: #fff;
+}
+
+.follow-suggestion-button.profile-unfollow-button.profile-follow-button:hover {
+    background-color: #ef2f83;
+}
+
 .follow-icon {
     margin-right: 3px;
     font-family: 'Fontawesome webfont', sans-serif;
@@ -912,7 +925,80 @@
 }
 
 .profile-hero-bar-fixed.profile-hero-bar {
-    display: block;
+    display: none;
+}
+
+.nav-dropdown {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 auto;
+    -ms-flex: 0 auto;
+    flex: 0 auto;
+}
+
+.nav-dropdown-toggle {
+    padding: 0px;
+}
+
+.nav-dropdown-list.w--open {
+    top: 50px;
+    right: -6px;
+    width: 150px;
+    min-width: 150%;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.nav-dropdown-link {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #66757f;
+}
+
+.nav-dropdown-link:hover {
+    background-color: #2fc2ef;
+    color: #fff;
+}
+
+.nav-dropdown-link-group {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    clear: both;
+    border-bottom: 1px solid rgba(0, 0, 0, .14);
+    font-size: 12px;
+}
+
+.nav-dropdown-username {
+    padding-top: 20px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.button-4 {
+    float: right;
+    background-color: transparent;
+}
+
+.tweet-dropdown {
+    right: -2px;
+    float: right;
+}
+
+.tweet-dropdown-toggle {
+    left: 14px;
+    top: 5px;
+    padding: 20px 20px 5px;
+    color: #9b9b9b;
+}
+
+.tweet-dropdown-list.w--open {
+    top: 28px;
+    right: -126px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, .17);
+    background-color: #fff;
 }
 
 @media (max-width: 991px) {
@@ -1076,4 +1162,9 @@
     src: url('../fonts/FontAwesome.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
+}
+
+.no-tweets-alert{
+    font-size:18px;
+    padding:10px 8px;
 }

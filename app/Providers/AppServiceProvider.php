@@ -14,12 +14,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('partials.navigation',function($view){
 
-            $view->with('user',Auth::user());
+            view()->composer('partials.navigation', function ($view) {
+
+                $view->with('authUser', Auth::user());
 
 
-        });
+            });
+
     }
 
     /**

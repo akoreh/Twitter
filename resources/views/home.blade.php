@@ -8,7 +8,10 @@
         <div class="w-row">
             <div class="column w-col w-col-3 w-col-stack">
                 <div class="homepage-left-column-wrapper w-clearfix">
-                    <div class="homepage-left-column-blue-top"></div><a class="homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->display_name}}</a><a class="homepage-left-handle homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->handle}}</a><img class="homepage-left-column-avatar" height="72" src="/images/profiles/{{$user->profile->image->file}}" width="72">
+                    <div class="homepage-left-column-blue-top"></div>
+                    <a class="homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->display_name}}</a>
+                    <a class="homepage-left-handle homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->handle}}</a>
+                    <img class="homepage-left-column-avatar" height="72" src="/images/profiles/{{$user->profile->image->file}}" width="72">
                     <div class="homepage-left-column-tweet-count-wrapper w-clearfix">
                         <h3 class="homepage-left-column-count-heading">Tweets</h3><a class="tweet-count" href="#">{{count($user->tweets)}}</a>
                     </div>
@@ -42,9 +45,31 @@
                 @if(count($tweets) > 0)
                     @foreach($tweets as $tweet)
                 <div class="tweet-wrapper w-clearfix">
-                    <div class="tweet-left-side-wrapper"><a href="{{route('show.profile',$tweet->user->profile->url_handle)}}"><img class="tweet-avatar" height="48" src="/images/profiles/{{$tweet->user->profile->image->file}}" width="48"></a>
+                    <div class="tweet-left-side-wrapper"><a href="{{route('show.profile',$tweet->user->profile->url_handle)}}">
+                            <img class="tweet-avatar" height="48" src="/images/profiles/{{$tweet->user->profile->image->file}}" width="48"></a>
                     </div>
-                    <div class="tweet-right-side-wrapper w-clearfix"><a class="tweet-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a><a class="tweet-handle" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span><a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
+                    <div class="tweet-right-side-wrapper w-clearfix">
+                        <a class="tweet-username" href="{{route('show.profile',$tweet->user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a>
+                        <a class="tweet-handle" href="{{route('show.profile',$tweet->user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span>
+                        <a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
+                        <div class="tweet-dropdown w-dropdown" data-delay="0">
+                            <div class="tweet-dropdown-toggle w-dropdown-toggle">
+                                <div class="w-icon-dropdown-toggle"></div>
+                            </div>
+                            <nav class="tweet-dropdown-list w-dropdown-list">
+                                <div class="nav-dropdown-link-group">
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Share via Direct Message</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Copy link to Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Embed Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Mute {{$tweet->user->profile->handle}}</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Block {{$tweet->user->profile->handle}}</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Report Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">I don't like this tweet</a>
+                                </div>
+                                <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Add to new Moment</a>
+                                </div>
+                            </nav>
+                        </div>
                         @if($embed=$tweet->getEmbed())
                         <p class="tweet-text">{{$tweet->withoutURL()}}</p>
                             <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
@@ -65,7 +90,7 @@
                     @endforeach
                 @else
             <div class="tweet-wrapper w-clearfix">
-                    <h4>Nothing to show! Follow other users to see their tweets!</h4>
+                    <h4 class="no-tweets-alert">Nothing to show! Follow other users to see their tweets!</h4>
             </div>
                 @endif
             </div>
