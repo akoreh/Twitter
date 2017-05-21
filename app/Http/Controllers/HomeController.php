@@ -25,7 +25,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::check()){
 
@@ -36,12 +36,18 @@ class HomeController extends Controller
                 array_push($followedUsers,$followedUser->id);
             }
 
-            $tweets=Tweet::whereIn('user_id',$followedUsers)->latest()->get();
+            $tweets=Tweet::whereIn('user_id',$followedUsers)->latest()->paginate(10);
 
-
-
+            if($request->ajax()){
+                return[
+                  'tweets'=>view('ajax.home')->with(compact('tweets','user'))->render(),
+                  'next_page'=>$tweets->nextPageUrl()
+                ];
+            }else{
 
             return view('home',compact('user','tweets'));
+
+            }
         }
         else{
             return view('welcome');

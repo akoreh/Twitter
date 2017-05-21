@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="column-3 w-col w-col-6 w-col-stack">
+            <div id="endless-pagination" class="column-3 w-col w-col-6 w-col-stack" data-next-page="{{$tweets->nextPageUrl()}}">
                 @if(count($tweets) > 0)
                     @foreach($tweets as $tweet)
                 <div class="tweet-wrapper w-clearfix">
@@ -127,6 +127,5 @@
             </div>
         </div>
 
-
-
+<script src="{{asset('js/scroll.js')}}"></script>
 @endsection
