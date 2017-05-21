@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\UserProfile;
+use App\UserRelation;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class UsersController extends Controller
@@ -85,6 +87,34 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function unfollow(Request $request){
+
+            $unfollowUserID = $request['userID'];
+            $followingUser = Auth::user();
+
+            $relationship = UserRelation::where('follower_id',$followingUser->id)->where('followed_id',$unfollowUserID )->first();
+
+            if(isset($relationship)){
+                $relationship->delete();
+            }
+
+
+    }
+
+
+    public function follow(Request $request){
+
+        $followedUserID = $request['userID'];
+        $followingUser = Auth::user();
+
+        $input['follower_id']=$followingUser->id;
+        $input['followed_id']=$followedUserID;
+
+        UserRelation::create($input);
+
+
     }
 
     public function getProfile($handle){

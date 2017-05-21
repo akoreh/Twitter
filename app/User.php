@@ -45,14 +45,16 @@ class User extends Authenticatable
 
     public function  checkFollowing($user){
 
+        $following = false;
 
-        foreach ($this->following as $followedUser) {
-            if ($followedUser->id == $user->id) {
-                return true;
-            } else {
-                return false;
+        foreach($this->following as $followedUser){
+            if($followedUser->id == $user->id){
+                $following=true;
             }
         }
+
+
+        return $following;
 
 
     }

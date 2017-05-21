@@ -31,7 +31,11 @@
     </style>
 </head>
 <body class="body">
+@if(Auth::check())
+
 @include('partials.tweet-modal')
+
+@endif
 @yield('content')
 
 

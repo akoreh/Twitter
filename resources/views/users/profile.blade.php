@@ -12,7 +12,21 @@
                 <a class="nav-avatar profile-fixed-nav-avatar w-clearfix w-inline-block" href="#"><img class="fixed-profile-image image" height="50" src="/images/profiles/{{$user->profile->image->file}}" width="80">
                 </a><a class="profile-fixed-username tweet-username" href="#">{{$user->profile->display_name}}</a><a class="profile-fixed-user-handle tweet-handle" href="#">{{$user->profile->handle}}</a>
             </div>
-            <div class="profile-hero-button-wrapper profile-hero-button-wrapper-fixed"><a class="nav-link profile-hero-button" href="#">Tweets<br><br> <span class="profile-hero-count">{{count($user->tweets)}}</span></a><a class="nav-link profile-hero-button" href="#">Following<br><br> <span class="profile-hero-count">{{count($user->following)}}</span></a><a class="nav-link profile-hero-button" href="#">followers<br><br> <span class="profile-hero-count">{{count($user->followers)}}</span></a><a class="nav-link profile-hero-button" href="#">likes<br><br> <span class="profile-hero-count">0</span></a><a class="follow-suggestion-button profile-fixed-follow-button profile-follow-button w-button" href="#">Follow</a>
+            <div class="profile-hero-button-wrapper profile-hero-button-wrapper-fixed">
+                <a class="nav-link profile-hero-button" href="#">Tweets<br><br> <span class="profile-hero-count">{{count($user->tweets)}}</span></a>
+                <a class="nav-link profile-hero-button" href="#">Following<br><br> <span class="profile-hero-count">{{count($user->following)}}</span></a>
+                <a class="nav-link profile-hero-button" href="#">followers<br><br> <span class="profile-hero-count">{{count($user->followers)}}</span></a>
+                <a class="nav-link profile-hero-button" href="#">likes<br><br> <span class="profile-hero-count">0</span></a>
+                @if(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && !Auth::user()->checkFollowing($user))
+
+                    <button id="follow-button" class="follow-suggestion-button profile-fixed-follow-button profile-follow-button w-button" href="#">Follow</button>
+
+                @elseif(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && Auth::user()->checkFollowing($user))
+
+                    <button id="follow-button" class="follow-suggestion-button profile-follow-button profile-unfollow-button profile-follow-button-fixed w-button" href="#">Following</button>
+
+                @endif
+
             </div><img class="image phone-profile-image" height="50" src="/images/profiles/{{$user->profile->image->file}}" width="80"><a class="phone-profile-username tweet-username" href="#">{{$user->profile->display_name}}</a><a class="phone-profile-handle tweet-handle" href="#">{{$user->profile->handle}}</a>
         </div>
         <div class="profile-hero-bar w-clearfix">
@@ -25,14 +39,89 @@
 
                 @if(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && !Auth::user()->checkFollowing($user))
 
-                    <a class="follow-suggestion-button profile-follow-button w-button" href="#">Follow</a>
+                    <button id="follow-button" class="follow-suggestion-button profile-follow-button w-button" href="#">Follow</button>
 
                 @elseif(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && Auth::user()->checkFollowing($user))
 
-                   <a class="follow-suggestion-button profile-follow-button profile-unfollow-button w-button" href="#">Following</a>
+                   <button id="follow-button" class="follow-suggestion-button profile-follow-button profile-unfollow-button w-button" href="#">Following</button>
 
                 @endif
 
+                @if(Auth::check())
+                <script>
+
+                    $('#follow-button').on('click',function(e){
+
+                        if($('#follow-button').html() === "Following"){
+
+//                        $('#follow-button').hover(function() {
+//                            $('#follow-button').html('Unfollow');
+//                        },
+//                            function(){
+//                                    $('#follow-button').html("Following");
+//                            });
+
+
+                            e.preventDefault();
+
+
+                            $.ajax({
+                                type:'delete',
+                                url:'/unfollow',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                data:{
+                                    userID: {{$user->id}}
+                                },
+                                success:function(){
+
+                                    $('#follow-button').removeClass('profile-unfollow-button').html("Follow");
+//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                },
+                                error: function(xhr){
+                                    alert('Error');
+//                                    alert(xhr.responseJSON.Message);
+//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                }
+
+                            });
+
+
+                        }
+
+                        else if($('#follow-button').html() === "Follow"){
+
+
+                            e.preventDefault();
+
+
+                            $.ajax({
+                                type:'post',
+                                url:'/follow',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                data:{
+                                    userID: {{$user->id}}
+                                },
+                                success:function(){
+                                    $('#follow-button').addClass('profile-unfollow-button').html("Following");
+//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                },
+                                error: function(xhr){
+                                    alert('Error');
+//                                    alert(xhr.responseJSON.Message);
+//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                }
+
+                            });
+
+
+                        }
+                    });
+                </script>
+        @endif
             </div><img class="image phone-profile-image" height="50" src="/images/profiles/{{$user->profile->image->file}}" width="80"><a class="phone-profile-username tweet-username" href="#">{{$user->profile->display_name}}</a><a class="phone-profile-handle tweet-handle" href="#">{{$user->profile->handle}}</a>
         </div>
     </div>
