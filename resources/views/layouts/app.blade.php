@@ -16,10 +16,8 @@
     <link rel="stylesheet" href="{{asset('css/normalize.css')}}">
     <link rel="stylesheet" href="{{asset('css/webflow.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <script
-            src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="{{asset('js/alerts.js')}}"></script>
     <style>
         body {
             font-family: 'Lato';
@@ -31,17 +29,28 @@
     </style>
 </head>
 <body class="body">
+<div class="alert-banner alert-success">
+    <h3 class="sucess-message">Tweet successfully submitted!</h3>
+</div>
+<div class="alert-banner alert-error">
+    <h3 class="sucess-message error-message">Failed to submit tweet!</h3>
+</div>
+
+
+
 @if(Auth::check())
 
 @include('partials.tweet-modal')
 
 @endif
-@yield('content')
 
+
+@yield('content')
 
 
 <script src="{{asset('js/modernizr.js')}}"></script>
 <script src="{{asset('js/webflow.js')}}"></script>
+
 @yield('footer')
 </body>
 </html>

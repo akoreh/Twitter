@@ -19,11 +19,11 @@
                 <a class="nav-link profile-hero-button" href="#">likes<br><br> <span class="profile-hero-count">0</span></a>
                 @if(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && !Auth::user()->checkFollowing($user))
 
-                    <button id="follow-button" class="follow-suggestion-button profile-fixed-follow-button profile-follow-button w-button" href="#">Follow</button>
+                    <button id="fixed-follow-button" class="follow-suggestion-button profile-fixed-follow-button profile-follow-button w-button" href="#">Follow</button>
 
                 @elseif(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && Auth::user()->checkFollowing($user))
 
-                    <button id="follow-button" class="follow-suggestion-button profile-follow-button profile-unfollow-button profile-follow-button-fixed w-button" href="#">Following</button>
+                    <button id="fixed-follow-button" class="follow-suggestion-button profile-follow-button profile-unfollow-button profile-follow-button-fixed w-button" href="#">Following</button>
 
                 @endif
 
@@ -39,20 +39,102 @@
 
                 @if(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && !Auth::user()->checkFollowing($user))
 
-                    <button id="follow-button" class="follow-suggestion-button profile-follow-button w-button" href="#">Follow</button>
+                    <button data-state="Follow" id="follow-button" class="follow-suggestion-button profile-follow-button w-button" href="#">Follow</button>
 
                 @elseif(Auth::check() && $user->profile->url_handle != Auth::user()->profile->url_handle && Auth::user()->checkFollowing($user))
 
-                   <button id="follow-button" class="follow-suggestion-button profile-follow-button profile-unfollow-button w-button" href="#">Following</button>
+                    <button data-state="Following" id="follow-button" class="follow-suggestion-button profile-follow-button profile-unfollow-button w-button" href="#">Following</button>
 
                 @endif
 
                 @if(Auth::check())
-                <script>
+                    <script>
 
-                    $('#follow-button').on('click',function(e){
+//                        $('#follow-button').hover(function() {
+//
+//                            var state = $('#follow-button').data('state');
+//
+//                            if(state === "Following") {
+//
+//                                $('#follow-button').hover(function () {
+//                                        $('#follow-button').html('Unfollow');
+//                                    },
+//                                    function () {
+//                                        $('#follow-button').html("Following");
+//                                    });
+//                            }
+//                        });
 
-                        if($('#follow-button').html() === "Following"){
+                        $('#follow-button').on('click',function(e){
+
+
+
+                            if($('#follow-button').html() === "Following"){
+
+
+
+//                                e.preventDefault();
+
+
+                                $.ajax({
+                                    type:'delete',
+                                    url:'/unfollow',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    data:{
+                                        userID: {{$user->id}}
+                                    },
+                                    success:function(){
+
+                                        $('#follow-button').removeClass('profile-unfollow-button').html("Follow");
+//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                    },
+                                    error: function(xhr){
+                                        alert('Error');
+//                                    alert(xhr.responseJSON.Message);
+//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                    }
+
+                                });
+
+
+                            }
+
+                            else if($('#follow-button').html() === "Follow"){
+
+//
+//                                e.preventDefault();
+
+
+                                $.ajax({
+                                    type:'post',
+                                    url:'/follow',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    data:{
+                                        userID: {{$user->id}}
+                                    },
+                                    success:function(){
+                                        $('#follow-button').addClass('profile-unfollow-button').html("Following");
+//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                    },
+                                    error: function(xhr){
+                                        alert('Error');
+//                                    alert(xhr.responseJSON.Message);
+//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                                    }
+
+                                });
+
+
+                            }
+                        });
+
+                        $('#fixed-follow-button').on('click',function(e){
+
+                            if($('#fixed-follow-button').html() === "Following"){
 
 //                        $('#follow-button').hover(function() {
 //                            $('#follow-button').html('Unfollow');
@@ -62,66 +144,66 @@
 //                            });
 
 
-                            e.preventDefault();
+//                                e.preventDefault();
 
 
-                            $.ajax({
-                                type:'delete',
-                                url:'/unfollow',
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                data:{
-                                    userID: {{$user->id}}
-                                },
-                                success:function(){
+                                $.ajax({
+                                    type:'delete',
+                                    url:'/unfollow',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    data:{
+                                        userID: {{$user->id}}
+                                    },
+                                    success:function(){
 
-                                    $('#follow-button').removeClass('profile-unfollow-button').html("Follow");
+                                        $('#fixed-follow-button').removeClass('profile-unfollow-button').html("Follow");
 //                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                },
-                                error: function(xhr){
-                                    alert('Error');
+                                    },
+                                    error: function(xhr){
+                                        alert('Error');
 //                                    alert(xhr.responseJSON.Message);
 //                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                }
+                                    }
 
-                            });
-
-
-                        }
-
-                        else if($('#follow-button').html() === "Follow"){
+                                });
 
 
-                            e.preventDefault();
+                            }
+
+                            else if($('#fixed-follow-button').html() === "Follow"){
+
+//
+//                                e.preventDefault();
 
 
-                            $.ajax({
-                                type:'post',
-                                url:'/follow',
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                data:{
-                                    userID: {{$user->id}}
-                                },
-                                success:function(){
-                                    $('#follow-button').addClass('profile-unfollow-button').html("Following");
+                                $.ajax({
+                                    type:'post',
+                                    url:'/follow',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    data:{
+                                        userID: {{$user->id}}
+                                    },
+                                    success:function(){
+                                        $('#fixed-follow-button').addClass('profile-unfollow-button').html("Following");
 //                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                },
-                                error: function(xhr){
-                                    alert('Error');
+                                    },
+                                    error: function(xhr){
+                                        alert('Error');
 //                                    alert(xhr.responseJSON.Message);
 //                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                }
+                                    }
 
-                            });
+                                });
 
 
-                        }
-                    });
-                </script>
-        @endif
+                            }
+                        });
+                    </script>
+                @endif
             </div><img class="image phone-profile-image" height="50" src="/images/profiles/{{$user->profile->image->file}}" width="80"><a class="phone-profile-username tweet-username" href="#">{{$user->profile->display_name}}</a><a class="phone-profile-handle tweet-handle" href="#">{{$user->profile->handle}}</a>
         </div>
     </div>

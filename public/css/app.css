@@ -2,19 +2,13 @@
 a:hover{
     text-decoration:none !important;
 }
+
 .welcome-slider {
     z-index: -5000;
     width: 100%;
     height: 100vh;
 }
 
-.loading-spinner {
-    display: block;
-    width: 12%;
-    height: 50%;
-    margin-right: auto;
-    margin-left: auto;
-}
 
 .logo {
     position: static;
@@ -414,6 +408,7 @@ a:hover{
     margin-left: 15%;
     float: none;
     clear: none;
+    width:50%;
 }
 
 .homepage-left-column-count-heading {
@@ -1071,6 +1066,62 @@ a:hover{
     color: hsla(0, 0%, 39%, .56);
 }
 
+.loading-spinner {
+    display: block;
+    width: 12%;
+    height: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.alert-banner {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    display: block;
+    width: 60%;
+    height: 50px;
+    max-width: 70%;
+    min-width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 1px;
+    background-color: #00ffa3;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .44);
+    top: -500px;
+}
+
+.alert-banner.alert-success {
+    z-index: 5000;
+    display: block;
+    background-color: rgba(0, 255, 163, .86);
+    top: -500px;
+}
+
+.alert-banner.alert-error {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    z-index: 5000;
+    display: block;
+    background-color: rgba(201, 35, 35, .86);
+    top: -500px;
+}
+
+.sucess-message {
+    position: relative;
+    top: -7px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+
 @media (max-width: 991px) {
     .welcome-left-wrapper {
         float: left;
@@ -1149,6 +1200,26 @@ a:hover{
     .profile-row {
         top: 10px;
     }
+    .alert-banner {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: end;
+        -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .sucess-message {
+        display: block;
+        padding-right: 0px;
+        padding-left: 0%;
+        float: none;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1175,6 +1246,10 @@ a:hover{
     }
     .follow-suggestion-button.profile-follow-button {
         margin-right: 15px;
+    }
+    .alert-banner {
+        width: 85%;
+        max-width: 85%;
     }
 }
 
@@ -1218,6 +1293,13 @@ a:hover{
     }
     .tweet-modal {
         max-width: 90%;
+    }
+    .alert-banner {
+        width: 100%;
+        height: 50px;
+        max-width: 100%;
+        min-width: 100%;
+        box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, .44);
     }
 }
 

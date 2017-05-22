@@ -33,14 +33,11 @@
             success:function(){
 
                 $('#tweet').val('');
-                $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                successAlert("Tweet successfully posted!");
             },
             error: function(xhr){
-                alert('Error');
-                alert(xhr.responseJSON.Message);
-                $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
+                errorAlert("Failed to post tweet!");
     }
-
         });
 
     });

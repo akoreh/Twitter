@@ -40,6 +40,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'user_relations', 'followed_id', 'follower_id');
     }
 
+
+
     public function following()
     {
         return $this->belongsToMany('App\User', 'user_relations', 'follower_id', 'followed_id');

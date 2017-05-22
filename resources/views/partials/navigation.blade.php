@@ -30,6 +30,7 @@
             <div class="icon w-icon-nav-menu"></div>
         </div>
     </div>
+
 </div>
     @else
     <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
@@ -44,5 +45,6 @@
                 <div class="icon w-icon-nav-menu"></div>
             </div>
         </div>
+
     </div>
 @endif
