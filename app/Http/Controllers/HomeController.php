@@ -31,6 +31,7 @@ class HomeController extends Controller
 
             $user=Auth::user();
             $followedUsers = array();
+            $authUser = $user;
 
             foreach($user->following as $followedUser){
                 array_push($followedUsers,$followedUser->id);
@@ -38,14 +39,15 @@ class HomeController extends Controller
 
             $tweets=Tweet::whereIn('user_id',$followedUsers)->latest()->paginate(10);
 
+
             if($request->ajax()){
                 return[
-                  'tweets'=>view('ajax.home')->with(compact('tweets','user'))->render(),
+                  'tweets'=>view('ajax.homeTweets')->with(compact('tweets','user'))->render(),
                   'next_page'=>$tweets->nextPageUrl()
                 ];
             }else{
 
-            return view('home',compact('user','tweets'));
+            return view('home',compact('user','tweets','authUser'));
 
             }
         }

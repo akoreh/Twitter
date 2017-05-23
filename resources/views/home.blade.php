@@ -3,7 +3,8 @@
 
 @section('content')
 
-@include('partials.navigation')
+@include('partials.navigation',$authUser)
+
     <div class="main-wrapper">
         <div class="w-row">
             <div class="column w-col w-col-3 w-col-stack">

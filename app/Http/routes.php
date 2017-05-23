@@ -22,7 +22,8 @@ Route::post('/search','SearchController@search')->name('search');
 
 Route::get('/', 'HomeController@index')->name('home');
 
-//Route::get('/welcome','HomeController@index');
+
+Route::auth();
 
 Route::get('/login','Auth\AuthController@login')->name('login');
 
@@ -32,7 +33,7 @@ Route::get('/{handle}','UsersController@getProfile')->name('show.profile');
 
 
 
-Route::auth();
+
 
 Route::group(['middleware'=>'auth'],function() {
 

@@ -7,6 +7,17 @@ a:hover{
     text-decoration:none !important;
 }
 
+a::selection{
+    text-decoration:none !important;
+}
+
+a:visited{
+    text-decoration:none !important;
+}
+
+a:focus{
+    text-decoration:none !important;
+}
 
 .welcome-slider {
     z-index: -5000;
@@ -1092,7 +1103,7 @@ a:hover{
 }
 
 .alert-banner {
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
     right: 0px;
@@ -1116,7 +1127,7 @@ a:hover{
 }
 
 .alert-banner.alert-error {
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: -500px;
     right: 0px;

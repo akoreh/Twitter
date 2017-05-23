@@ -1,37 +1,37 @@
 
 $(document).ready(function(){
 
+
+
     $(window).scroll(fetchTweets);
+    var page = $('#endless-pagination').data('next-page');
 
     function fetchTweets(){
 
-        var page = $('#endless-pagination').data('next-page');
-
-
-        if(page !== null){
-
+        if(page != null){
+            var finished = true;
             clearTimeout($.data(this,"scrollCheck"));
 
             $.data(this,"scrollCheck",setTimeout(function(){
 
                 var scroll_position_for_load= $(window).height() + $(window).scrollTop() + 100;
 
+                if(finished) {
+                    if (scroll_position_for_load >= $(document).height()) {
+                        finished=false;
+                        $('#endless-pagination').append('<div id="loading-tweet" class="tweet-wrapper"><img class="loading-spinner" src="images/spinner.gif"></div>');
 
-                if(scroll_position_for_load >= $(document).height()){
+                        $.get(page, function (data) {
+                            $('#endless-pagination').append(data.tweets);
+                            page = data.next_page;
+                            $('#loading-tweet').remove();
+                        });
 
-                    $('#endless-pagination').append('<div id="loading-tweet" class="tweet-wrapper"><img class="loading-spinner" src="images/spinner.gif"></div>');
-                    $.get(page,function(data){
-                        console.log("Works");
-                        $('#endless-pagination').append(data.tweets);
-                        $('#endless-pagination').data('next-page',data.next_page);
-                        $('#loading-tweet').remove();
-                    });
-
+                    }
                 }
 
-
-            },350))
-
+            },3000))
+            finished=true;
         }
 
 

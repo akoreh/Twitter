@@ -48,6 +48,8 @@ class UsersController extends Controller
 
     public function getProfile($handle){
 
+        $authUser = Auth::user();
+
         $profile=UserProfile::where('url_handle',$handle)->first();
 
         if($profile){
@@ -57,8 +59,11 @@ class UsersController extends Controller
 
 
 //            $tweets = Tweet::where('user_id', $user->id)->latest()->get();
-
-            return view('users.profile', compact('tweets', 'user'));
+            if(isset($authUser)) {
+                return view('users.profile', compact('tweets', 'user','authUser'));
+            }else{
+                return view('users.profile', compact('tweets', 'user'));
+            }
         }else{
             return view('errors.404');
         }
