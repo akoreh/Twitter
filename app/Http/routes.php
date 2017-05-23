@@ -14,13 +14,15 @@
 Route::get('/checkHandle','UsersController@checkHandle');
 Route::get('/checkEmail','UsersController@checkEmail');
 
+Route::get('/autocomplete','SearchController@autocomplete')->name('autocomplete');
+
+Route::post('/search','SearchController@search')->name('search');
+
 
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/welcome','HomeController@index');
-
-Route::auth();
+//Route::get('/welcome','HomeController@index');
 
 Route::get('/login','Auth\AuthController@login')->name('login');
 
@@ -28,9 +30,9 @@ Route::get('/register','Auth\AuthController@register')->name('register');
 
 Route::get('/{handle}','UsersController@getProfile')->name('show.profile');
 
-//Route::resource('/tweets','TweetsController');
 
 
+Route::auth();
 
 Route::group(['middleware'=>'auth'],function() {
 

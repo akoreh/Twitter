@@ -10,6 +10,7 @@
         <div class="logo"></div>
         <nav class="nav-menu w-nav-menu" role="navigation"><a class="nav-link w-nav-link" href="{{route('home')}}"><span class="home-icon"></span>Home</a><a class="nav-link w-nav-link" href="#"><span class="notifications-icon"></span>Notifications</a><a class="nav-link w-nav-link" href="#"><span class="messages-icon"></span>Messages</a>
         </nav>
+
         <div class="nav-right"><a class="tweet-button w-button" data-ix="show-tweet-modal" href="#"><span class="tweet-button-icon"></span>Tweet</a>
             <div class="nav-dropdown w-dropdown" data-delay="0">
                 <div class="nav-dropdown-toggle w-clearfix w-dropdown-toggle"><img class="image" height="35" src="images/profiles/{{$authUser->profile->image->file}}" width="85">
@@ -24,6 +25,19 @@
                     <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Settings and Privacy</a><a class="nav-dropdown-link w-dropdown-link" href="{{url('/logout')}}">Log Out</a>
                     </div>
                 </nav>
+            </div>
+        </div>
+        <div class="search-form-wrapper w-form">
+            <form class="search-form w-clearfix"  id="search-form" method="post" action="{{route('search')}}">
+                {{csrf_field()}}
+                <input class="search-field w-input"  id="search"  name="search" placeholder="Search" type="text">
+                <button type="submit" class="search-button w-button" href="#"></button>
+            </form>
+            <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form</div>
             </div>
         </div>
         <div class="w-nav-button">
@@ -48,3 +62,22 @@
 
     </div>
 @endif
+
+<script>
+    $(function()
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $( "#search" ).autocomplete({
+            source: "{{route('autocomplete')}}",
+            minLength: 3,
+            select: function(event, ui) {
+                $('#search').val(ui.item.value);
+            }
+        });
+    });
+</script>
