@@ -1,32 +1,19 @@
+.no-tweets-alert{
+    font-size:18px;
+    padding:10px 8px;
+}
+
+a:hover{
+    text-decoration:none !important;
+}
+
+
 .welcome-slider {
     z-index: -5000;
     width: 100%;
     height: 100vh;
 }
 
-.slide {
-    background-image: url('../images/1.jpg');
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.slide-2 {
-    background-image: url('../images/2.jpg');
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-}
-
-.slide-3 {
-    background-image: url('../images/3.jpg');
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-}
 
 .logo {
     position: static;
@@ -1544,3 +1531,4 @@
     font-weight: 400;
     font-style: normal;
 }
+
