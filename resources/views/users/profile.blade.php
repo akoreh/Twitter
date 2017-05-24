@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if(Auth::check())
     @include('partials.navigation',$authUser)
-
+  @else
+    @include('partials.navigation')
+@endif
     <div class="profile-hero-section">
         <div class="profile-hero-image-wrapper"><img class="profile-hero-image" data-ix="hide-profile-navbar" sizes="100vw" src="/images/profiles/banners/{{$user->profile->banner}}">
         </div>

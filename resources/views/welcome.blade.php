@@ -70,7 +70,7 @@
                         <input class="login-button w-button" id="login-button" data-wait="Please wait..." type="submit" value="Login">
 
                         <div class="checkbox-field w-checkbox w-clearfix">
-                            <input checked="checked" class="w-checkbox-input" id="Remember-me" name="remember" type="checkbox">
+                            <input  class="w-checkbox-input" id="Remember-me" name="remember" type="checkbox">
                             <label class="login-remember-me-label w-form-label" for="Remember-me">Remember me</label>
                         </div><a class="forgot-password-link" href="{{ url('/password/reset') }}">Forgot password?</a>
 

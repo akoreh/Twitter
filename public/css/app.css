@@ -341,7 +341,7 @@ a:focus{
 
 .main-wrapper {
     display: block;
-    max-width: 80%;
+    max-width: 1218px;
     margin-top: 60px;
     margin-right: auto;
     margin-left: auto;
@@ -374,6 +374,11 @@ a:focus{
 .homepage-left-column-wrapper.settings-left-column-wrapper {
     height: auto;
     padding-bottom: 20px;
+}
+
+.welcome-right-wrapper{
+    position:absolute !important;
+    top:-50px!important;
 }
 
 .homepage-left-column-blue-top {

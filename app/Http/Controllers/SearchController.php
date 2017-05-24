@@ -29,8 +29,6 @@ class SearchController extends Controller
                 $results[] = ['id' => $query->id, 'value' => $query->display_name];
             }
             return response()->json($results);
-        }else{
-            return view('errors.404');
         }
 
 
