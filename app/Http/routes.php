@@ -29,10 +29,6 @@ Route::get('/login','Auth\AuthController@login')->name('login');
 
 Route::get('/register','Auth\AuthController@register')->name('register');
 
-Route::get('/user/{handle}','UsersController@getProfile')->name('show.profile');
-
-
-
 
 
 Route::group(['middleware'=>'auth'],function() {
@@ -52,3 +48,5 @@ Route::group(['middleware'=>'auth'],function() {
     Route::post('/delete-tweet','TweetsController@deleteTweet')->name('delete-tweet');
 
 });
+
+Route::get('/{handle}','UsersController@getProfile')->name('show.profile');

@@ -317,8 +317,11 @@
                     }
                     ,
                     success:function(){
+
+                        $element.fadeTo( "slow" , 0.8, function() {
+                            $(this).remove();
+                        });
                         successAlert("Tweet deleted!");
-                        $element.remove();
 
                     },
                     error: function(){
