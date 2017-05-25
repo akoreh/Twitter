@@ -14,10 +14,10 @@
                     <a class="homepage-left-handle homepage-left-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$user->profile->handle}}</a>
                     <img class="homepage-left-column-avatar" height="72" src="/images/profiles/{{$user->profile->image->file}}" width="72">
                     <div class="homepage-left-column-tweet-count-wrapper w-clearfix">
-                        <h3 class="homepage-left-column-count-heading">Tweets</h3><a class="tweet-count" href="#">{{count($user->tweets)}}</a>
+                        <h3 class="homepage-left-column-count-heading">Tweets</h3><a class="tweet-count" id="home-tweet-count" href="#">{{count($user->tweets)}}</a>
                     </div>
                     <div class="homepage-left-column-follower-count-wrapper homepage-left-column-tweet-count-wrapper w-clearfix">
-                        <h3 class="following-count homepage-left-column-count-heading">Following</h3><a class="following-count tweet-count" href="#">{{count($user->following)}}</a>
+                        <h3 class="following-count homepage-left-column-count-heading">Following</h3><a class="following-count tweet-count"  href="#">{{count($user->following)}}</a>
                     </div>
                 </div>
                 <div class="homepage-left-column-trending-wrapper homepage-left-column-wrapper w-clearfix">

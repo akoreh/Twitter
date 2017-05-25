@@ -34,6 +34,9 @@
 
                 $('#tweet').val('');
                 successAlert("Tweet successfully posted!");
+                var tweetCount = parseInt($('#home-tweet-count').html());
+                tweetCount++;
+                $('#home-tweet-count').html(tweetCount);
             },
             error: function(xhr){
                 errorAlert("Failed to post tweet!");

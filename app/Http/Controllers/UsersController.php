@@ -65,6 +65,7 @@ class UsersController extends Controller
                 return view('users.profile', compact('tweets', 'user'));
             }
         }else{
+
             return view('errors.404');
         }
     }

@@ -49,163 +49,6 @@
 
                 @endif
 
-                @if(Auth::check())
-                    <script>
-
-//                        $('#follow-button').hover(function() {
-//
-//                            var state = $('#follow-button').data('state');
-//
-//                            if(state === "Following") {
-//
-//                                $('#follow-button').hover(function () {
-//                                        $('#follow-button').html('Unfollow');
-//                                    },
-//                                    function () {
-//                                        $('#follow-button').html("Following");
-//                                    });
-//                            }
-//                        });
-
-                        $('#follow-button').on('click',function(e){
-
-
-
-                            if($('#follow-button').html() === "Following"){
-
-
-
-//                                e.preventDefault();
-
-
-                                $.ajax({
-                                    type:'delete',
-                                    url:'/unfollow',
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    data:{
-                                        userID: {{$user->id}}
-                                    },
-                                    success:function(){
-
-                                        $('#follow-button').removeClass('profile-unfollow-button').html("Follow");
-//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    },
-                                    error: function(xhr){
-                                        alert('Error');
-//                                    alert(xhr.responseJSON.Message);
-//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    }
-
-                                });
-
-
-                            }
-
-                            else if($('#follow-button').html() === "Follow"){
-
-//
-//                                e.preventDefault();
-
-
-                                $.ajax({
-                                    type:'post',
-                                    url:'/follow',
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    data:{
-                                        userID: {{$user->id}}
-                                    },
-                                    success:function(){
-                                        $('#follow-button').addClass('profile-unfollow-button').html("Following");
-//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    },
-                                    error: function(xhr){
-                                        alert('Error');
-//                                    alert(xhr.responseJSON.Message);
-//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    }
-
-                                });
-
-
-                            }
-                        });
-
-                        $('#fixed-follow-button').on('click',function(e){
-
-                            if($('#fixed-follow-button').html() === "Following"){
-
-//                        $('#follow-button').hover(function() {
-//                            $('#follow-button').html('Unfollow');
-//                        },
-//                            function(){
-//                                    $('#follow-button').html("Following");
-//                            });
-
-
-//                                e.preventDefault();
-
-
-                                $.ajax({
-                                    type:'delete',
-                                    url:'/unfollow',
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    data:{
-                                        userID: {{$user->id}}
-                                    },
-                                    success:function(){
-
-                                        $('#fixed-follow-button').removeClass('profile-unfollow-button').html("Follow");
-//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    },
-                                    error: function(xhr){
-                                        alert('Error');
-//                                    alert(xhr.responseJSON.Message);
-//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    }
-
-                                });
-
-
-                            }
-
-                            else if($('#fixed-follow-button').html() === "Follow"){
-
-//
-//                                e.preventDefault();
-
-
-                                $.ajax({
-                                    type:'post',
-                                    url:'/follow',
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    data:{
-                                        userID: {{$user->id}}
-                                    },
-                                    success:function(){
-                                        $('#fixed-follow-button').addClass('profile-unfollow-button').html("Following");
-//                                    $(".success-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    },
-                                    error: function(xhr){
-                                        alert('Error');
-//                                    alert(xhr.responseJSON.Message);
-//                                    $(".error-alert").animate({bottom: '-=500'}).delay(4000).animate({bottom: '+=500'});
-                                    }
-
-                                });
-
-
-                            }
-                        });
-                    </script>
-                @endif
             </div><img class="image phone-profile-image" height="50" src="/images/profiles/{{$user->profile->image->file}}" width="80"><a class="phone-profile-username tweet-username" href="#">{{$user->profile->display_name}}</a><a class="phone-profile-handle tweet-handle" href="#">{{$user->profile->handle}}</a>
         </div>
     </div>
@@ -229,10 +72,14 @@
             <div class="column-3 w-col w-col-6 w-col-stack">
                 @if(count($tweets) > 0)
                     @foreach($tweets as $tweet)
-                        <div class="tweet-wrapper w-clearfix">
+                        <div class="tweet-wrapper w-clearfix" data-tweet-id="{{$tweet->id}}" >
                             <div class="tweet-left-side-wrapper"><a href="{{route('show.profile',$tweet->user->profile->url_handle)}}"><img class="tweet-avatar" height="48" src="/images/profiles/{{$tweet->user->profile->image->file}}" width="48"></a>
                             </div>
-                            <div class="tweet-right-side-wrapper w-clearfix"><a class="tweet-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a><a class="tweet-handle" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span><a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
+                            <div class="tweet-right-side-wrapper w-clearfix">
+                                <a class="tweet-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a>
+                                <a class="tweet-handle" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span>
+                                <a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
+
                                 @if($tweet->user->profile->url_handle == $user->profile->url_handle)
 
                                     <div class="tweet-dropdown w-dropdown" data-delay="0">
@@ -245,7 +92,7 @@
                                                 <a class="nav-dropdown-link w-dropdown-link" href="#">Copy link to Tweet</a>
                                                 <a class="nav-dropdown-link w-dropdown-link" href="#">Embed Tweet</a>
                                                 <a class="nav-dropdown-link w-dropdown-link" href="#">Pin to your profile page</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Delete tweet</a>
+                                                <a class="nav-dropdown-link w-dropdown-link profile-tweet-delete-button"  href="#">Delete tweet</a>
                                             </div>
                                             <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Add to new Moment</a>
                                             </div>
@@ -304,15 +151,15 @@
         @if(Auth::check())
             <div class="homepage-right-column-wrapper">
                 <h3 class="homepage-left-column-trending-heading">Who to follow</h3>
-                <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/Ms2bWRqk_normal.jpg" width="48">
+                <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="/images/Ms2bWRqk_normal.jpg" width="48">
                     <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Michael Zimmerman</a><a class="follow-suggestion-handle tweet-handle" href="#">@zimm3rman</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
                     </div>
                 </div>
-                <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/eYMXfAQX_normal.jpg" width="48">
+                <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="/images/eYMXfAQX_normal.jpg" width="48">
                     <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Maggie</a><a class="follow-suggestion-handle tweet-handle" href="#">@margaretjhowell</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
                     </div>
                 </div>
-                <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/5UgMNCwA_normal.jpg" width="48">
+                <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="/images/5UgMNCwA_normal.jpg" width="48">
                     <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Breitbart News</a><a class="follow-suggestion-handle tweet-handle" href="#">@BreitbartNews</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
                     </div>
                 </div>
@@ -343,3 +190,148 @@
     </div>
     </div>
 @endsection
+
+@if(Auth::check())
+@section('footer')
+
+    <script>
+
+        //                        $('#follow-button').hover(function() {
+        //
+        //                            var state = $('#follow-button').data('state');
+        //
+        //                            if(state === "Following") {
+        //
+        //                                $('#follow-button').hover(function () {
+        //                                        $('#follow-button').html('Unfollow');
+        //                                    },
+        //                                    function () {
+        //                                        $('#follow-button').html("Following");
+        //                                    });
+        //                            }
+        //                        });
+
+        $('#follow-button').on('click',function(e){
+
+            if($('#follow-button').html() === "Following"){
+                $.ajax({
+                    type:'delete',
+                    url:'/unfollow',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{
+                        userID: {{$user->id}}
+                    },
+                    success:function(){
+                        $('#follow-button').removeClass('profile-unfollow-button').html("Follow");
+                    },
+                    error: function(xhr){
+                    }
+                });
+            }
+
+            else if($('#follow-button').html() === "Follow"){
+                $.ajax({
+                    type:'post',
+                    url:'/follow',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{
+                        userID: {{$user->id}}
+                    },
+                    success:function(){
+                        $('#follow-button').addClass('profile-unfollow-button').html("Following");
+                    },
+                    error: function(xhr){
+                    }
+                });
+            }
+        });
+
+        $('#fixed-follow-button').on('click',function(e){
+
+            if($('#fixed-follow-button').html() === "Following"){
+
+                $.ajax({
+                    type:'delete',
+                    url:'/unfollow',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{
+                        userID: {{$user->id}}
+                    },
+                    success:function(){
+
+                        $('#fixed-follow-button').removeClass('profile-unfollow-button').html("Follow");
+                    },
+                    error: function(xhr){
+                    }
+
+                });
+
+
+            }
+
+            else if($('#fixed-follow-button').html() === "Follow"){
+
+
+                $.ajax({
+                    type:'post',
+                    url:'/follow',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{
+                        userID: {{$user->id}}
+                    },
+                    success:function(){
+                        $('#follow-button').addClass('profile-unfollow-button').html("Following");
+                    },
+                    error: function(xhr){
+                    }
+
+                });
+
+
+            }
+        });
+
+        //DELETE TWEET
+
+        $('.profile-tweet-delete-button').each(function(){
+            $(this).on('click',function(){
+
+                $element = $(this).closest('.tweet-wrapper');
+
+                $.ajax({
+                    type:'post',
+                    url:'{{URL::route('delete-tweet')}}',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{
+                        tweetID : $element.data('tweet-id')
+                    }
+                    ,
+                    success:function(){
+                        successAlert("Tweet deleted!");
+                        $element.remove();
+
+                    },
+                    error: function(){
+                        errorAlert("Failed to delete tweet!");
+                    }
+                });
+
+            });
+        });
+
+
+
+    </script>
+
+@endsection
+@endif

@@ -15,9 +15,7 @@ elixir(function(mix) {
     mix.sass('app.scss')
 
         .styles([
-            'bootstrap.min.css'
-
-
+            'custom.css'
         ],'./public/css/libs.css')
 
         .scripts([

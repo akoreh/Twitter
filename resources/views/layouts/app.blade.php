@@ -52,7 +52,7 @@
 
 <script src="{{asset('js/modernizr.js')}}"></script>
 <script src="{{asset('js/webflow.js')}}"></script>
-
+<script src="{{asset('js/alerts.js')}}"></script>
 @yield('footer')
 </body>
 </html>

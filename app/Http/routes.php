@@ -29,7 +29,7 @@ Route::get('/login','Auth\AuthController@login')->name('login');
 
 Route::get('/register','Auth\AuthController@register')->name('register');
 
-Route::get('/{handle}','UsersController@getProfile')->name('show.profile');
+Route::get('/user/{handle}','UsersController@getProfile')->name('show.profile');
 
 
 
@@ -48,5 +48,7 @@ Route::group(['middleware'=>'auth'],function() {
         return redirect()->route('home');
 
     });
+
+    Route::post('/delete-tweet','TweetsController@deleteTweet')->name('delete-tweet');
 
 });

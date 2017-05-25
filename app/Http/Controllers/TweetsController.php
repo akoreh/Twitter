@@ -82,8 +82,16 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteTweet(Request $request)
     {
-        //
+        $tweetID = $request['tweetID'];
+        $user = Auth::user();
+
+        $tweet=Tweet::findOrFail($tweetID);
+
+        if($tweet && $tweet->user_id == $user->id){
+            $tweet->delete();
+        }
+
     }
 }

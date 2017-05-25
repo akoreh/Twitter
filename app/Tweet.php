@@ -23,7 +23,7 @@ class Tweet extends Model
             $single_url = $url[0][0];
 
 
-            if ($single_url) {
+            if (isset($single_url)) {
                 $embed = Embed::create($single_url);
 
                 $embedArray = (array)$embed;
