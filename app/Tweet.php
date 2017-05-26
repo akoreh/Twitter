@@ -14,6 +14,11 @@ class Tweet extends Model
         'tweet'
     ];
 
+    public function hashtags()
+    {
+        return $this->belongsToMany('App\Hashtag', 'tweet_hashtags', 'tweet_id', 'hashtag_id');
+    }
+
 
     public function getEmbed()
     {
@@ -36,6 +41,19 @@ class Tweet extends Model
                 return false;
             }
         }
+    }
+
+    public function getHashtags(){
+        $string = $this->tweet;
+
+        if(preg_match_all('/#(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/',$string,$hashtags)){
+
+            return $hashtags;
+
+        }
+
+        return false;
+
     }
 
     public function withoutURL(){

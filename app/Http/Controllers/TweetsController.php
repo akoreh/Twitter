@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Hashtag;
 use App\Tweet;
+use App\TweetHashtag;
 use App\UserProfile;
 use Illuminate\Http\Request;
 
@@ -40,16 +42,37 @@ class TweetsController extends Controller
     public function store(Request $request)
     {
 
-
-
         $user = Auth::user();
 
         $input['tweet'] = $request['tweet'];
 
         $input['user_id']=$user->id;
 
-        Tweet::create($input);
+        $tweet=Tweet::create($input);
 
+        if($hashtagArray=$tweet->getHashtags()){
+
+            for($i=0; $i < count($hashtagArray[0]); $i++){
+
+                if($hashtag=Hashtag::where('hashtag',$hashtagArray[0][$i])->first()){
+                    $hashtag->popularity++;
+                    $hashtag->save();
+
+                    $tweetHashtagInput['tweet_id']=$tweet->id;
+                    $tweetHashtagInput['hashtag_id']=$hashtag->id;
+                    TweetHashtag::create($tweetHashtagInput);
+                }else{
+                    $hashtagInput['hashtag'] = $hashtagArray[0][$i];
+                    $hashtag=Hashtag::create($hashtagInput);
+
+                    $tweetHashtagInput['tweet_id']=$tweet->id;
+                    $tweetHashtagInput['hashtag_id']=$hashtag->id;
+
+                    TweetHashtag::create($tweetHashtagInput);
+                }
+            }
+
+        }
 
     }
 
