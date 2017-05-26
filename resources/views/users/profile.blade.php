@@ -15,7 +15,7 @@
                 </a><a class="profile-fixed-username tweet-username" href="#">{{$user->profile->display_name}}</a><a class="profile-fixed-user-handle tweet-handle" href="#">{{$user->profile->handle}}</a>
             </div>
             <div class="profile-hero-button-wrapper profile-hero-button-wrapper-fixed">
-                <a class="nav-link profile-hero-button" href="#">Tweets<br><br> <span class="profile-hero-count">{{count($user->tweets)}}</span></a>
+                <a class="nav-link profile-hero-button" href="#">Tweets<br><br> <p class="profile-hero-count profile-tweet-count" >{{count($user->tweets)}}</p></a>
                 <a class="nav-link profile-hero-button" href="#">Following<br><br> <span class="profile-hero-count">{{count($user->following)}}</span></a>
                 <a class="nav-link profile-hero-button" href="#">followers<br><br> <span class="profile-hero-count">{{count($user->followers)}}</span></a>
                 <a class="nav-link profile-hero-button" href="#">likes<br><br> <span class="profile-hero-count">0</span></a>
@@ -33,7 +33,7 @@
         </div>
         <div class="profile-hero-bar w-clearfix">
             <div class="profile-hero-button-wrapper w-clearfix">
-                <a class="nav-link profile-hero-button" href="#">Tweets<br><br> <span class="profile-hero-count">{{count($user->tweets)}}</span></a>
+                <a class="nav-link profile-hero-button" href="#">Tweets<br><br> <span class="profile-hero-count profile-tweet-count">{{count($user->tweets)}}</span></a>
                 <a class="nav-link profile-hero-button" href="#">Following<br><br> <span class="profile-hero-count">{{count($user->following)}}</span></a>
                 <a class="nav-link profile-hero-button" href="#">followers<br><br> <span class="profile-hero-count">{{count($user->followers)}}</span></a>
                 <a class="nav-link profile-hero-button" href="#">likes<br><br> <span class="profile-hero-count">0</span></a>
@@ -69,75 +69,75 @@
 
                 </div>
             </div>
-            <div class="column-3 w-col w-col-6 w-col-stack">
+            <div class="column-3 w-col w-col-6 w-col-stack" id="tweet-column">
                 @if(count($tweets) > 0)
                     @foreach($tweets as $tweet)
                         <div class="tweet-wrapper w-clearfix" data-tweet-id="{{$tweet->id}}" >
-                            <div class="tweet-left-side-wrapper"><a href="{{route('show.profile',$tweet->user->profile->url_handle)}}"><img class="tweet-avatar" height="48" src="/images/profiles/{{$tweet->user->profile->image->file}}" width="48"></a>
+                <div class="tweet-left-side-wrapper"><a href="{{route('show.profile',$tweet->user->profile->url_handle)}}"><img class="tweet-avatar" height="48" src="/images/profiles/{{$tweet->user->profile->image->file}}" width="48"></a>
+                </div>
+                <div class="tweet-right-side-wrapper w-clearfix">
+                    <a class="tweet-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a>
+                    <a class="tweet-handle" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span>
+                    <a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
+
+                    @if(Auth::check() && $user->profile->url_handle == Auth::user()->profile->url_handle)
+
+                        <div class="tweet-dropdown w-dropdown" data-delay="0">
+                            <div class="tweet-dropdown-toggle w-dropdown-toggle">
+                                <div class="w-icon-dropdown-toggle"></div>
                             </div>
-                            <div class="tweet-right-side-wrapper w-clearfix">
-                                <a class="tweet-username" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->display_name}}</a>
-                                <a class="tweet-handle" href="{{route('show.profile',$user->profile->url_handle)}}">{{$tweet->user->profile->handle}}</a><span> · </span>
-                                <a class="tweet-date" href="#">{{$tweet->created_at->diffForHumans()}}</a>
-
-                                @if($tweet->user->profile->url_handle == $user->profile->url_handle)
-
-                                    <div class="tweet-dropdown w-dropdown" data-delay="0">
-                                        <div class="tweet-dropdown-toggle w-dropdown-toggle">
-                                            <div class="w-icon-dropdown-toggle"></div>
-                                        </div>
-                                        <nav class="tweet-dropdown-list w-dropdown-list">
-                                            <div class="nav-dropdown-link-group">
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Share via Direct Message</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Copy link to Tweet</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Embed Tweet</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Pin to your profile page</a>
-                                                <a class="nav-dropdown-link w-dropdown-link profile-tweet-delete-button"  href="#">Delete tweet</a>
-                                            </div>
-                                            <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Add to new Moment</a>
-                                            </div>
-                                        </nav>
-                                    </div>
-
-
-                                @else
-                                    <div class="tweet-dropdown w-dropdown" data-delay="0">
-                                        <div class="tweet-dropdown-toggle w-dropdown-toggle">
-                                            <div class="w-icon-dropdown-toggle"></div>
-                                        </div>
-                                        <nav class="tweet-dropdown-list w-dropdown-list">
-                                            <div class="nav-dropdown-link-group">
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Share via Direct Message</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Copy link to Tweet</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Embed Tweet</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Mute @SkyNewsAus</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Block @SkyNewsAus</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">Report Tweet</a>
-                                                <a class="nav-dropdown-link w-dropdown-link" href="#">I don't like this tweet</a>
-                                            </div>
-                                            <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Add to new Moment</a>
-                                            </div>
-                                        </nav>
-                                    </div>
-
-                                @endif
-
-
-                                @if($embed=$tweet->getEmbed())
-                                    <p class="tweet-text">{{$tweet->withoutURL()}}</p>
-                                    <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
-                                    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-                                    <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
-                                    </div>
-                            </div>
+                            <nav class="tweet-dropdown-list w-dropdown-list">
+                                <div class="nav-dropdown-link-group">
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Share via Direct Message</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Copy link to Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Embed Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Pin to your profile page</a>
+                                    <a class="nav-dropdown-link w-dropdown-link profile-tweet-delete-button" href="#">Delete tweet</a>
+                                </div>
+                                <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Add to new Moment</a>
+                                </div>
+                            </nav>
                         </div>
-                        @else
 
-                            <p class="tweet-text">{{$tweet->tweet}}</p>
 
-                            <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
+                    @else
+                        <div class="tweet-dropdown w-dropdown" data-delay="0">
+                            <div class="tweet-dropdown-toggle w-dropdown-toggle">
+                                <div class="w-icon-dropdown-toggle"></div>
                             </div>
-            </div>
+                            <nav class="tweet-dropdown-list w-dropdown-list">
+                                <div class="nav-dropdown-link-group">
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Share via Direct Message</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Copy link to Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Embed Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Mute @SkyNewsAus</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Block @SkyNewsAus</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">Report Tweet</a>
+                                    <a class="nav-dropdown-link w-dropdown-link" href="#">I don't like this tweet</a>
+                                </div>
+                                <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Add to new Moment</a>
+                                </div>
+                            </nav>
+                        </div>
+
+                    @endif
+
+
+                    @if($embed=$tweet->getEmbed())
+                        <p class="tweet-text">{{$tweet->withoutURL()}}</p>
+                        <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
+                        <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                        <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
+                        </div>
+                </div>
+           </div>
+            @else
+
+                <p class="tweet-text">{{$tweet->tweet}}</p>
+
+                <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
+                </div>
+        </div>
         </div>
         @endif
         @endforeach
@@ -192,24 +192,10 @@
 @endsection
 
 @if(Auth::check())
+
 @section('footer')
 
     <script>
-
-        //                        $('#follow-button').hover(function() {
-        //
-        //                            var state = $('#follow-button').data('state');
-        //
-        //                            if(state === "Following") {
-        //
-        //                                $('#follow-button').hover(function () {
-        //                                        $('#follow-button').html('Unfollow');
-        //                                    },
-        //                                    function () {
-        //                                        $('#follow-button').html("Following");
-        //                                    });
-        //                            }
-        //                        });
 
         $('#follow-button').on('click',function(e){
 
@@ -299,6 +285,11 @@
             }
         });
 
+    </script>
+
+    @if(Auth::check() && $user->profile->url_handle == Auth::user()->profile->url_handle)
+    <script>
+
         //DELETE TWEET
 
         $('.profile-tweet-delete-button').each(function(){
@@ -318,10 +309,14 @@
                     ,
                     success:function(){
 
-                        $element.fadeTo( "slow" , 0.8, function() {
+                        $element.fadeTo( "fast" , 0.5, function() {
                             $(this).remove();
                         });
                         successAlert("Tweet deleted!");
+
+                        var tweetCount = parseInt($('.profile-tweet-count').html());
+                        tweetCount--;
+                        $('.profile-tweet-count').html(tweetCount);
 
                     },
                     error: function(){
@@ -332,9 +327,32 @@
             });
         });
 
+        function getLatestTweet(){
+            $.ajax({
+                type:'get',
+                url:'{{route('get-latest-profile-tweet')}}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{
+                    userID: {{Auth::user()->id}}
+                },
+                success:function(data){
 
+                    $('#tweet-column').prepend(data.tweet)
+                    var profileTweetCount = parseInt($('.profile-tweet-count').html());
+                    profileTweetCount++;
+                    $('.profile-tweet-count').html(profileTweetCount);
+                },
+                error: function(){
+                    alert("Error");
+                }
+            });
+        }
 
     </script>
+    @endif
 
 @endsection
+
 @endif

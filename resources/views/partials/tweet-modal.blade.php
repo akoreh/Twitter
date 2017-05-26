@@ -15,7 +15,6 @@
 </div>
 </div>
 
-
 <script>
     $('#tweet-button').on('click',function(e){
         e.preventDefault();
@@ -37,6 +36,12 @@
                 var tweetCount = parseInt($('#home-tweet-count').html());
                 tweetCount++;
                 $('#home-tweet-count').html(tweetCount);
+
+                if (typeof getLatestTweet == 'function') {
+                    getLatestTweet();
+                }
+
+
             },
             error: function(xhr){
                 errorAlert("Failed to post tweet!");
@@ -44,5 +49,6 @@
         });
 
     });
+
 </script>
 

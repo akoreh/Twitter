@@ -94,4 +94,21 @@ class TweetsController extends Controller
         }
 
     }
+
+    public function getLatestProfileTweet(Request $request){
+
+        if($request->ajax()){
+            $user=Auth::user();
+            $userID=$request['userID'];
+
+            $tweet=Tweet::where('user_id',$userID)->latest()->first();
+
+            if($tweet){
+                return[
+                    'tweet'=>view('ajax.profileLatestTweet')->with(compact('tweet','user'))->render()
+                ];
+            }
+
+        }
+    }
 }

@@ -42,7 +42,9 @@
 
 @if(Auth::check())
 
-@include('partials.tweet-modal')
+
+
+@include('partials.tweet-modal',$authUser = Auth::user())
 
 @endif
 

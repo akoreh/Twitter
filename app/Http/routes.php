@@ -47,6 +47,8 @@ Route::group(['middleware'=>'auth'],function() {
 
     Route::post('/delete-tweet','TweetsController@deleteTweet')->name('delete-tweet');
 
+    Route::get('/get-latest-profile-tweet','TweetsController@getLatestProfileTweet')->name('get-latest-profile-tweet');
+
 });
 
 Route::get('/{handle}','UsersController@getProfile')->name('show.profile');
