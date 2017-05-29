@@ -50,6 +50,10 @@ Route::group(['middleware'=>'auth'],function() {
 
     Route::get('/get-latest-profile-tweet','TweetsController@getLatestProfileTweet')->name('get-latest-profile-tweet');
 
+    Route::get('/settings','UsersController@settings')->name('settings');
+
+    Route::post('/settings-update','UsersController@update')->name('settings.update');
+
 });
 
 Route::get('/{handle}','UsersController@getProfile')->name('show.profile');

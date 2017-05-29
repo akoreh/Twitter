@@ -5,11 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateHashtagsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('hashtags', function (Blueprint $table) {
@@ -20,11 +16,7 @@ class CreateHashtagsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::drop('hashtags');

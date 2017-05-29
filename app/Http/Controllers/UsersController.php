@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Hashtag;
+use App\Image;
 use App\User;
 use App\UserProfile;
 use App\UserRelation;
@@ -101,5 +102,42 @@ class UsersController extends Controller
 
     }
 
+
+    public function settings()
+    {
+
+        if (Auth::check()) {
+           $authUser = Auth::user();
+
+            return view('users.settings.main', compact('authUser'));
+         }else{
+            return view('errors.404');
+        }
+    }
+
+    public function update(Request $request){
+
+        $user=Auth::user();
+
+        if(isset($user)) {
+
+            $profile=UserProfile::where('user_id',$user->id)->first();
+
+            if(isset($profile)) {
+                if ($file = $request->file('file')) {
+                    $name = time() . $file->getClientOriginalName();
+                    $file->move('images/profiles', $name);
+                    $image = Image::create(['file' => $name]);
+                    $profile->image_id = $image->id;
+                }
+
+                $profile->display_name = $request->display_name;
+
+                $profile->save();
+
+                return redirect()->route('settings');
+            }
+        }
+    }
 
 }

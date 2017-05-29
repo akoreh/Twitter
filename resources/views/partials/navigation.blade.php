@@ -20,7 +20,7 @@
                     </div>
                     <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Help Center</a><a class="nav-dropdown-link w-dropdown-link" href="#">Keyboard Shortcuts</a><a class="nav-dropdown-link w-dropdown-link" href="#">Twitter Ads</a><a class="nav-dropdown-link w-dropdown-link" href="#">Analytics</a>
                     </div>
-                    <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="#">Settings and Privacy</a><a class="nav-dropdown-link w-dropdown-link" href="{{url('/logout')}}">Log Out</a>
+                    <div class="nav-dropdown-link-group"><a class="nav-dropdown-link w-dropdown-link" href="{{route('settings')}}">Settings and Privacy</a><a class="nav-dropdown-link w-dropdown-link" href="{{url('/logout')}}">Log Out</a>
                     </div>
                 </nav>
             </div>
