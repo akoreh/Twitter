@@ -22,4 +22,9 @@ class Hashtag extends Model
         }
     }
 
+    public function tweets()
+    {
+        return $this->belongsToMany('App\Tweet', 'tweet_hashtags', 'hashtag_id', 'tweet_id');
+    }
+
 }

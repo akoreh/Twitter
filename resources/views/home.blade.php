@@ -61,18 +61,6 @@
                         </div>
                         @if($embed=$tweet->getEmbed())
                         <p class="tweet-text">{{$tweet->clean()}}</p>
-
-                            {{--<a class="tweet-embed-wrapper w-inline-block" href="{{$embed->url}}">--}}
-                                {{--<div class="tweet-embed-image-wrapper"><img class="tweet-embed-image" src="{{$embed->image}}">--}}
-                                {{--</div>--}}
-                                {{--<div class="tweet-embed-text-wrapper">--}}
-                                    {{--<h1 class="tweet-embed-heading">{{$embed->title}}</h1>--}}
-                                    {{--<p class="tweet-embed-paragraph">{{$embed->description}}</p>--}}
-                                    {{--<h6 class="heading-3">{{$embed->providerName}}</h6>--}}
-                                {{--</div>--}}
-                            {{--</a>--}}
-
-
                             <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
                             <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                             <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>

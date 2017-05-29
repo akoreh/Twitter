@@ -120,8 +120,15 @@ class TweetsController extends Controller
 
     public function showHashtag($hashtag_id){
         $hashtag=Hashtag::findOrFail($hashtag_id);
+        $authUser = Auth::user();
+        $tweets=$hashtag->tweets()->paginate(10);
+        $trendingHashtags=Hashtag::getTrending();
 
-        return $hashtag->hashtag;
+        if(isset($authUser)){
+            return view('hashtag',compact('tweets','authUser','trendingHashtags'));
+        }else{
+            return view('hashtag',compact('tweets','trendingHashtags'));
+        }
     }
 
 
