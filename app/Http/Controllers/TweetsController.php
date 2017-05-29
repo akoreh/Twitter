@@ -13,32 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TweetsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -77,28 +52,18 @@ class TweetsController extends Controller
     }
 
 
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     public function deleteTweet(Request $request)
     {
-        $tweetID = $request['tweetID'];
-        $user = Auth::user();
+        if(Auth::check()) {
+            $tweetID = $request['tweetID'];
+            $user = Auth::user();
 
-        $tweet=Tweet::findOrFail($tweetID);
+            $tweet = Tweet::findOrFail($tweetID);
 
-        if($tweet && $tweet->user_id == $user->id){
-            $tweet->delete();
+            if ($tweet && $tweet->user_id == $user->id) {
+                $tweet->delete();
+            }
         }
-
     }
 
     public function getLatestProfileTweet(Request $request){
@@ -120,12 +85,12 @@ class TweetsController extends Controller
 
     public function showHashtag($hashtag_id){
         $hashtag=Hashtag::findOrFail($hashtag_id);
-        $authUser = Auth::user();
-        $tweets=$hashtag->tweets()->paginate(10);
-        $trendingHashtags=Hashtag::getTrending();
+        if(Auth::check()) {
+            $authUser = Auth::user();
+            $tweets = $hashtag->tweets()->latest()->paginate(10);
+            $trendingHashtags = Hashtag::getTrending();
 
-        if(isset($authUser)){
-            return view('hashtag',compact('tweets','authUser','trendingHashtags'));
+            return view('hashtag', compact('tweets','trendingHashtags', 'authUser'));
         }else{
             return view('hashtag',compact('tweets','trendingHashtags'));
         }

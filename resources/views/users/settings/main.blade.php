@@ -10,7 +10,7 @@
                 <div class="homepage-left-column-wrapper settings-left-column-wrapper w-clearfix">
                     <div class="homepage-left-column-blue-top"></div>
                     <a class="homepage-left-username" href="#">{{$authUser->profile->display_name}}</a>
-                    <a class="homepage-left-handle homepage-left-username" href="#">{{$authUser->profile->handle}}</a>
+                    <a class="homepage-left-handle homepage-left-username" href="{{route('show.profile',$authUser->profile->url_handle)}}">{{$authUser->profile->handle}}</a>
                     <img class="homepage-left-column-avatar" height="72" src="/images/profiles/{{$authUser->profile->image->file}}" width="72">
                 </div>
                 <div class="homepage-left-column-trending-wrapper homepage-left-column-wrapper settings-nav-wrapper">
@@ -63,7 +63,11 @@
                                 </div>
                                 <div class="fileUpload btn btn-primary" style="display:inline-block">
                                     <span>Profile Pic</span>
-                                    <input id="uploadBtn" name="file" type="file" class="upload" >
+                                    <input id="uploadBtn" name="profile_pic" type="file" class="upload" >
+                                </div>
+                                <div class="fileUpload btn btn-primary" style="display:inline-block">
+                                    <span>Banner</span>
+                                    <input id="uploadBtn" name="banner" type="file" class="upload" >
                                 </div>
                                 <input style="clear:both;display:block;margin: 0 auto;" class="submit-button w-button" data-wait="Please wait..." type="submit" value="Save Changes">
                             </form>

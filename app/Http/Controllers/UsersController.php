@@ -124,11 +124,17 @@ class UsersController extends Controller
             $profile=UserProfile::where('user_id',$user->id)->first();
 
             if(isset($profile)) {
-                if ($file = $request->file('file')) {
-                    $name = time() . $file->getClientOriginalName();
-                    $file->move('images/profiles', $name);
+                if ($profilePic = $request->file('profile_pic')) {
+                    $name = time() . $profilePic->getClientOriginalName();
+                    $profilePic->move('images/profiles', $name);
                     $image = Image::create(['file' => $name]);
                     $profile->image_id = $image->id;
+                }
+
+                if ($banner = $request->file('banner')) {
+                    $name = time() . $banner->getClientOriginalName();
+                    $banner->move('images/profiles/banners', $name);
+                    $profile->banner = $name;
                 }
 
                 $profile->display_name = $request->display_name;

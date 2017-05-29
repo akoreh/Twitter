@@ -74,8 +74,10 @@ class Tweet extends Model
     }
 
     public function clean(){
-        $string =  preg_replace('/https?:\/\/[^\s"<>]+/', '',$this->tweet);
-        $string =  preg_replace('/#(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/','',$this->tweet);
+
+        $stringURL =  preg_replace('/https?:\/\/[^\s"<>]+/', '',$this->tweet);
+        $string =  preg_replace('/#(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/','',$stringURL);
+
 
         return $string;
     }

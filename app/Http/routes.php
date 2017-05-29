@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/checkHandle','UsersController@checkHandle');
 Route::get('/checkEmail','UsersController@checkEmail');
@@ -18,12 +19,8 @@ Route::get('/autocomplete','SearchController@autocomplete')->name('autocomplete'
 
 Route::post('/search','SearchController@search')->name('search');
 
-
-
-Route::get('/', 'HomeController@index')->name('home');
-
-
 Route::auth();
+
 
 Route::get('/login','Auth\AuthController@login')->name('login');
 
@@ -40,11 +37,7 @@ Route::group(['middleware'=>'auth'],function() {
 
     Route::post('/tweet', 'TweetsController@store')->name('tweet');
 
-    Route::get('/tweet',function(){
-
-        return redirect()->route('home');
-
-    });
+    Route::get('/tweet',function(){return redirect()->route('home');});
 
     Route::post('/delete-tweet','TweetsController@deleteTweet')->name('delete-tweet');
 
