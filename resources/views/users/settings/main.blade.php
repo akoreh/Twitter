@@ -55,7 +55,7 @@
                     </div>
                     <div class="settings-group">
                         <div class="settings-account-form w-form">
-                            <form class="settings-account-form"  method="post" action="{{route('settings.update')}}">
+                            <form class="settings-account-form"  method="post" action="{{route('settings.update')}}" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label class="settings-field-label" for="display_name">Display Name</label>
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="fileUpload btn btn-primary" style="display:inline-block">
                                     <span>Profile Pic</span>
-                                    <input id="uploadBtn" name="file" type="file" class="upload" />
+                                    <input id="uploadBtn" name="file" type="file" class="upload" >
                                 </div>
                                 <input style="clear:both;display:block;margin: 0 auto;" class="submit-button w-button" data-wait="Please wait..." type="submit" value="Save Changes">
                             </form>
