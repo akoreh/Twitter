@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Tweet;
 use Embed\Embed;
+use App\Hashtag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,7 @@ class HomeController extends Controller
             }
 
             $tweets=Tweet::whereIn('user_id',$followedUsers)->latest()->paginate(10);
-
+            $trendingHashtags = Hashtag::getTrending();
 
             if($request->ajax()){
                 return[
@@ -47,7 +48,7 @@ class HomeController extends Controller
                 ];
             }else{
 
-            return view('home',compact('user','tweets','authUser'));
+            return view('home',compact('user','tweets','authUser','trendingHashtags'));
 
             }
         }

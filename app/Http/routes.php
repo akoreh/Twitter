@@ -29,6 +29,7 @@ Route::get('/login','Auth\AuthController@login')->name('login');
 
 Route::get('/register','Auth\AuthController@register')->name('register');
 
+Route::get('/hashtags/{hashtag_id}','TweetsController@showHashtag')->name('show.hashtag');
 
 
 Route::group(['middleware'=>'auth'],function() {

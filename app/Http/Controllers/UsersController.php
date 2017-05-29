@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Hashtag;
 use App\User;
 use App\UserProfile;
 use App\UserRelation;
@@ -56,13 +57,13 @@ class UsersController extends Controller
             $user = $profile->user;
 
             $tweets=$user->tweets()->latest()->get();
-
+            $trendingHashtags=Hashtag::getTrending();
 
 //            $tweets = Tweet::where('user_id', $user->id)->latest()->get();
             if(isset($authUser)) {
-                return view('users.profile', compact('tweets', 'user','authUser'));
+                return view('users.profile', compact('tweets', 'user','authUser','trendingHashtags'));
             }else{
-                return view('users.profile', compact('tweets', 'user'));
+                return view('users.profile', compact('tweets', 'user','trendingHashtags'));
             }
         }else{
 

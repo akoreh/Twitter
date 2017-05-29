@@ -22,24 +22,12 @@
                 </div>
                 <div class="homepage-left-column-trending-wrapper homepage-left-column-wrapper w-clearfix">
                     <h3 class="homepage-left-column-trending-heading">Trending</h3>
-                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#BattleOfBucharest</a>
-                        <h6 class="trending-tweet-count">4,505 Tweets</h6>
-                    </div>
-                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#ThreeWordTrump</a>
-                        <h6 class="trending-tweet-count">17,454 Tweets</h6>
-                    </div>
-                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#Romanian</a>
-                        <h6 class="trending-tweet-count">1,631 Tweets</h6>
-                    </div>
-                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#saturdaymorning</a>
-                        <h6 class="trending-tweet-count">8,034 Tweets</h6>
-                    </div>
-                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#WorldWhiskyDay</a>
-                        <h6 class="trending-tweet-count">3,274 Tweets</h6>
-                    </div>
-                    <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="#">#AFLPiesHawks</a>
-                        <h6 class="trending-tweet-count">5,204 Tweets</h6>
-                    </div>
+
+                    @foreach($trendingHashtags as $hashtag)
+                        <div class="homepage-left-column-trending-element-wrapper"><a class="trending-hashtag" href="{{route('show.hashtag',$hashtag->id)}}">{{$hashtag->hashtag}}</a>
+                            <h6 class="trending-tweet-count">{{$hashtag->popularity}} Tweets</h6>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <div id="endless-pagination" class="column-3 w-col w-col-6 w-col-stack" data-next-page="{{$tweets->nextPageUrl()}}">
@@ -72,7 +60,7 @@
                             </nav>
                         </div>
                         @if($embed=$tweet->getEmbed())
-                        <p class="tweet-text">{{$tweet->withoutURL()}}</p>
+                        <p class="tweet-text">{{$tweet->clean()}}</p>
 
                             {{--<a class="tweet-embed-wrapper w-inline-block" href="{{$embed->url}}">--}}
                                 {{--<div class="tweet-embed-image-wrapper"><img class="tweet-embed-image" src="{{$embed->image}}">--}}
@@ -93,7 +81,15 @@
                 </div>
                         @else
 
-                         <p class="tweet-text">{{$tweet->tweet}}</p>
+                            <p class="tweet-text">{{$tweet->clean()}}
+                                @if($tweet->getDisplayHashtags())
+                                    @foreach($tweet->hashtags as $hashtag)
+
+                                        <a href="{{route('show.hashtag',$hashtag->id)}}" style="color:black; font-weight:bold;">{{$hashtag->hashtag}}</a>
+
+                                    @endforeach
+                                @endif
+                            </p>
 
                         <div class="tweet-button-wrapper w-clearfix"><a class="tweet-bottom-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">20</span></span></a><a class="retweet-button tweet-bottom-button w-button" href="#"><span class="reply-icon">&nbsp;<span class="tweet-reply-count">96</span></span></a><a class="tweet-bottom-button tweet-favorite-button w-button" href="#"><span class="reply-icon"> <span class="tweet-reply-count">43</span></span></a>
                         </div>

@@ -43,6 +43,8 @@ class Tweet extends Model
         }
     }
 
+
+
     public function getHashtags(){
         $string = $this->tweet;
 
@@ -56,8 +58,24 @@ class Tweet extends Model
 
     }
 
-    public function withoutURL(){
+    public function getDisplayHashtags(){
+        $string = $this->tweet;
+        $hashtagArray = array();
+
+        if(preg_match_all('/#(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/',$string,$hashtags)){
+
+            for($i=0; $i < count($hashtags[0]); $i++) {
+                array_push($hashtagArray,$hashtags[0][$i]);
+            }
+            return $hashtagArray;
+        }else{
+            return false;
+        }
+    }
+
+    public function clean(){
         $string =  preg_replace('/https?:\/\/[^\s"<>]+/', '',$this->tweet);
+        $string =  preg_replace('/#(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/','',$this->tweet);
 
         return $string;
     }
