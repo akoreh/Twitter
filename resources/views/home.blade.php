@@ -96,15 +96,15 @@
             <div class="column-2 w-col w-col-3 w-col-stack">
                 <div class="homepage-right-column-wrapper">
                     <h3 class="homepage-left-column-trending-heading">Who to follow</h3>
-                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/Ms2bWRqk_normal.jpg" width="48">
+                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="/images/Ms2bWRqk_normal.jpg" width="48">
                         <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Michael Zimmerman</a><a class="follow-suggestion-handle tweet-handle" href="#">@zimm3rman</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
                         </div>
                     </div>
-                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/eYMXfAQX_normal.jpg" width="48">
+                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="/images/eYMXfAQX_normal.jpg" width="48">
                         <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Maggie</a><a class="follow-suggestion-handle tweet-handle" href="#">@margaretjhowell</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
                         </div>
                     </div>
-                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="images/5UgMNCwA_normal.jpg" width="48">
+                    <div class="follow-column-wrapper w-clearfix"><img class="follow-suggestion-avatar" height="48" src="/images/5UgMNCwA_normal.jpg" width="48">
                         <div class="follower-suggestion-aux-div w-clearfix"><a class="follow-suggestion-username tweet-username" href="#">Breitbart News</a><a class="follow-suggestion-handle tweet-handle" href="#">@BreitbartNews</a><a class="follow-suggestion-button w-button" href="#"><span class="follow-icon"></span>Follow</a>
                         </div>
                     </div>

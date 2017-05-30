@@ -9,11 +9,13 @@
 
         @if($embed=$tweet->getEmbed())
             <p class="tweet-text">{{$tweet->clean()}}
-                @foreach($tweet->getDisplayHashtags() as $hashtag)
+                @if($tweet->getDisplayHashtags())
+                @foreach($tweet->hashtags as $hashtag)
 
                     <a href="" style="color:black;">{{$hashtag}}</a>
 
                 @endforeach
+                @endif
             </p>
             <blockquote class="embedly-card" data-card-controls="0"><h4><a href="{{$embed->url}}">{{$embed->title}}</a></h4><p>{{$embed->description}}</p></blockquote>
             <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
