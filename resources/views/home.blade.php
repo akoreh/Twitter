@@ -70,7 +70,7 @@
                         @else
 
                             <p class="tweet-text">{{$tweet->clean()}}
-                                @if($tweet->getDisplayHashtags())
+                                @if($tweet->hashtag)
                                     @foreach($tweet->hashtags as $hashtag)
 
                                         <a href="{{route('show.hashtag',$hashtag->id)}}" style="color:black; font-weight:bold;">{{$hashtag->hashtag}}</a>
